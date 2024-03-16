@@ -1,0 +1,160 @@
+/*menu*/
+*{text-decoration:none; list-style:none; margin:0px; padding:0px; outline:none;}
+body{margin:0px; padding:0px; font-family: 'Open Sans', sans-serif;}
+section{width:100%; max-width:1200px; margin:0px auto; display:table; position:relative;}
+
+header{width:100%; display:table; background-color:#f9f9f7; margin-bottom:50px;}
+#logo{float:left; font-size:24px; text-transform:uppercase; color:#002e5b; font-weight:600; padding:20px 0px;}
+.navidol{width:auto; float:right;}
+.navidol .ulidol{display:table; float:right;}
+.navidol .ulidol .liidol{float:left;}
+.navidol .ulidol .liidol:last-child{padding-right:0px;}
+.navidol .ulidol .liidol .aidol{color:#002e5b; font-size:18px; padding: 25px 20px; display:inline-block; transition: all 0.5s ease 0s;}
+.navidol .ulidol .liidol .aidol:hover{background-color:#002e5b; color:#f9f9f7; transition: all 0.5s ease 0s;}
+.navidol .ulidol .liidol .aidol:hover i{color:#f9f9f7; transition: all 0.5s ease 0s;}
+
+.toggle-menu .ulidol{display:table; width:25px;}
+.toggle-menu .ulidol .liidol{width:100%; height:3px; background-color:#002e5b; margin-bottom:4px;}
+.toggle-menu .ulidol .liidol:last-child{margin-bottom:0px;}
+
+input[type=checkbox], label{display:none;}
+
+
+@media only screen and (max-width: 980px) {
+header{padding:20px 0px;}
+#logo{padding:0px;}
+input[type=checkbox] {position: absolute; top: -9999px; left: -9999px; background:none;}
+input[type=checkbox]:fous{background:none;}
+label {float:right; padding:8px 0px; display:inline-block; cursor:pointer; }
+input[type=checkbox]:checked ~ .navidol {display:block;}
+
+.navidol{display:none; position:absolute; right:0px; top:53px; background-color:#002e5b; padding:0px; z-index:99;}
+.navidol .ulidol{width:auto;}
+.navidol .ulidol .liidol{float:none; padding:0px; width:100%; display:table;}
+.navidol .ulidol .liidol .aidol{color:#FFF; font-size:15px; padding:10px 20px; display:block; border-bottom: 1px solid rgba(225,225,225,0.1);}
+}
+.imgidol{
+  width: 30px;
+  height: 30px;
+}
+
+
+
+.profile-container {
+    background-color: #fff;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    padding: 20px;
+  }
+  .profile-header {
+    background-color: #ffffff;
+    padding: 10px;
+    text-align: center;
+  }
+  .profile-photo {
+    width: 500px;
+    height: 600px;
+    margin: 10px auto;
+  }
+  .profile-info {
+    padding: 10px;
+    margin-left: 50px;
+  }
+  .profile-info h3 {
+    color: #333;
+  }
+  .profile-info p {
+    color: #666;
+  }
+  .social-icons {
+    text-align: right;
+    margin-top: 10px;
+  }
+  .social-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #ddd; /* Placeholder for icons */
+    margin-left: 5px;
+  }
+  .profile-footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+  }
+
+.container {
+  display: flex;
+  overflow-x: scroll;
+  padding: 15px;
+  width: 500px;
+  background: #ffffff;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 24px;
+  border-radius: 8px;
+  gap: 12px;
+}
+.container::-webkit-scrollbar {
+  height: 6px;
+}
+.container::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.container .item {
+  flex: 0 0 100%;
+  padding: 24px;
+  float: left;
+  color: #ffffff;
+  border-radius: 8px;
+  scroll-snap-align: start;
+}
+.container .item .h22 {
+  text-transform: capitalize;
+}
+.container .item .h42 {
+ text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 300;
+  margin-top: 48px;
+  margin-bottom: 8px;
+}
+.container .item:nth-child(1) {
+  background: linear-gradient(170deg, #0061ff, #60efff);
+}
+.container .item:nth-child(2) {
+  background: linear-gradient(170deg, #7ef29d, #0f68a9);
+}
+.container .item:nth-child(3) {
+  background: linear-gradient(170deg, #40c9ff, #e81cff);
+}
+.container .item:nth-child(4) {
+  background: linear-gradient(170deg, #f7ba2c, #ea5459);
+}
+.container .item:nth-child(5) {
+  background: linear-gradient(170deg, #e2db1f, #ae10f9);
+}
+.tth{
+    display: flex;
+    gap: 50px;
+}
+.imgtt{
+    width: 150px;
+    height: 150px;
+}
+.img2{
+    width: 250px;
+    height: 150px;
+}
+.h22{
+    text-align: center;
+}
+.p2{
+    text-align: center;
+}
