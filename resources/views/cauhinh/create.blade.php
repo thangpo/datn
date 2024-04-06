@@ -20,7 +20,7 @@
             <form action="{{route('cauhinh.store')}}" enctype="multipart/form-data" method="POST" style="border: 1px solid;">
                <h1 style="text-align: center;">Thêm thân tượng mới Cấu hình website</h1>
                 @csrf
-
+                @method('PUT')
                 <div style="display: flex; gap: 20px;">
 
                     <div>

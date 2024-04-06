@@ -40,6 +40,15 @@
         </a>
         <span class="tooltip">Quản lý cấu hình</span>
       </li>
+
+      <li>
+        <a href="{{ route('baivietall') }}">
+          <i class='bx bxs-cog'></i>
+          <span class="links_name">Quản lý bài viết</span>
+        </a>
+        <span class="tooltip">Quản lý bài viết</span>
+      </li>
+
       <li>
         <a href="{{ route('nhomnhac.index') }}">
           <i class='bx bx-group'></i>
