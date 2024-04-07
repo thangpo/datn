@@ -14,10 +14,10 @@
         <li class="liidol"><a class="aidol" href="#">Trang chủ</a></li>
         <li class="liidol"><a class="aidol" href="{{route('baihatview')}}">Nhạc</a></li>
         <li class="liidol"><a class="aidol" href="{{route('videocn')}}">MV mới</a></li>
-        <li class="liidol"><a class="aidol" href="#">Đặt vé</a></li>
         <li class="liidol"><a class="aidol" href="#">Nhóm nhạc</a></li>
         <li class="liidol"><a class="aidol" href="{{route('congdien')}}">Công diễn</a></li>
         <li class="liidol"><a class="aidol" href="{{route('baidangall')}}">Bài đăng</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('viewbaiveit')}}">Tin tức</a></li>
         <li class="liidol"><a class="aidol" href="{{route('login')}}">Đăng nhập</a></li>
         </ul>
         </nav>
@@ -109,7 +109,7 @@
             </p>
 
                 <div class="grup-tombol">
-                    <a class="a1" href="#">Xem chi tiết</a>
+                    <a class="a1" href="{{route('gioithieu')}}">Xem chi tiết</a>
                     <a class="a1" href="#">Trang đặt vé</a>
                 </div>
 

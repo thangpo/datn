@@ -62,8 +62,29 @@ class BaivietController extends Controller
         return redirect()->route('baivietall')->with('thongbao', 'thêm thành công');
     }
 
-    public function destroy(Baiviet $baiviet){
+    public function destroy(Baiviet $baiviet)
+    {
         $baiviet->delete();
         return redirect()->route('baivietall')->with('thongbao', 'xoa thanh cong');
+    }
+
+
+
+
+
+
+
+    // hiển thị trang chủ
+
+    public function viewbaiveit()
+    {
+        $baiviet = DB::table('baiviet')->get();
+        return view('baiviet.tintuc', compact('baiviet'));
+    }
+
+
+    public function gioithieu()
+    {
+        return view('baiviet.gioithieu');
     }
 }

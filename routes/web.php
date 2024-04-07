@@ -55,6 +55,8 @@ Route::match(['get', 'post'], '/thembaiviet', [BaivietController::class, 'themba
 Route::match(['get', 'post'], '/thembai', [BaivietController::class, 'thembai'])->name('thembai');
 Route::match(['get', 'post'], '/suabai/{id}', [BaivietController::class, 'suabai'])->name('suabai');
 Route::put('/sualaibv/{id}', [BaivietController::class, 'sualaibv'])->name('sualaibv');
+Route::match(['get', 'post'], '/viewbaiveit', [BaivietController::class, 'viewbaiveit'])->name('viewbaiveit');
+Route::match(['get', 'post'], '/gioithieu', [BaivietController::class, 'gioithieu'])->name('gioithieu');
 //lich trình
 Route::match(['get', 'post'], '/emaillichtrinh/{id1}/lichtrinh/{id2}', [LichtrinhtController::class, 'emaillichtrinh'])->name('emaillichtrinh');
 
