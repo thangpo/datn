@@ -162,18 +162,6 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-// profile idol
-    public function profile($id){
-        $users = User::where('id', $id)->get();
-        foreach ($users as $us){
-            $idol = Idol::where('id', $us->idol_id)->get();
-            foreach ($idol as $id){
-                $nhomnhac = Nhomnhac::where('id', $id->nhomnhac_id)->get();
-            }
-        }
-        return view('user.profile', compact('users', 'idol', 'nhomnhac'));
-    }
-
 // ảnh id
     public function anhchitiet($id1, $id2){
         $idol = Idol::find($id1);
@@ -439,5 +427,22 @@ public function themvideo(Request $request, $id1, $id2){
         $bangthanhtoan = DB::table('bangthanhtoan')->get();
         $lichtrinh = DB::table('lichtrinh')->get();
         return view('vexem.hoadon', compact('users', 'profile' ,'donhang', 'vexem', 'bangthanhtoan', 'lichtrinh'));
+    }
+
+
+
+    // xem thông tin và đăng xuất
+
+
+    public function chuyentiep($id){
+        $users = User::where('id', $id)->get();
+        foreach ($users as $us){
+            $idol = Idol::where('id', $us->idol_id)->get();
+            foreach ($idol as $id){
+                $nhomnhac = Nhomnhac::where('id', $id->nhomnhac_id)->get();
+            }
+        }
+
+        return view('idol.thongtinx', compact('users', 'idol', 'nhomnhac'));
     }
 }
