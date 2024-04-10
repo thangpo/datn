@@ -377,6 +377,11 @@ public function themvideo(Request $request, $id1, $id2){
         return view('user.profilend', compact('users', 'profile'));
     }
 
+    public function themprf($id){
+        $users = User::find($id);
+        return view('user.thempfnd', compact('users'));
+    }
+
     public function pfnguoidung(UserRequest $request) {
         $profile = new Profile();
         $profile->users_id = $request->users_id;
@@ -392,7 +397,12 @@ public function themvideo(Request $request, $id1, $id2){
             $profile->anhnd = $imageName;
         }
         $profile->save();
-        return redirect()->back();
+       
+        $idus = $request->users_id;
+        $users = User::where('id', $idus)->first();
+        $profile = Profile::where('users_id', $users->id)->get();
+        $users = User::where('id', $idus)->get();
+        return view('user.profilend', compact('users', 'profile'));
     }
 
 

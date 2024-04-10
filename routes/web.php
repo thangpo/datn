@@ -153,6 +153,7 @@ Route::match(['get', 'post'], '/taikhoant', [UserController::class, 'taikhoant']
 
 // profile idol tài khoản
 Route::match(['get', 'post'], '/chuyentiep/{id}', [UserController::class, 'chuyentiep'])->name('chuyentiep');
+Route::match(['get', 'post'], '/themprf/{id}', [UserController::class, 'themprf'])->name('themprf');
 //
 Route::match(['get', 'post'], '/anhchitiet/{id1}/user/{id2}', [UserController::class, 'anhchitiet'])->name('anhchitiet');
 Route::match(['get', 'post'], '/themanhid/{id1}/user/{id2}', [UserController::class, 'themanhid'])->name('themanhid');
