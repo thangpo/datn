@@ -51,7 +51,7 @@
     <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
     @endif
 
-    
+
 
     <label for="toggle-1" class="toggle-menu">
       <ul>
@@ -126,7 +126,9 @@
 
     <div class="grup-tombol">
       <a class="a1" href="{{route('gioithieu')}}">Xem chi tiết</a>
-      <a class="a1" href="#">Trang đặt vé</a>
+      @foreach ($users as $us)
+      <a class="a1" href="{{route('nhomnhacall', $us->id)}}">Xem nhóm nhạc</a>
+      @endforeach
     </div>
 
     <div class="sosmed">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Nhomnhac;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -58,5 +59,13 @@ class NhomnhacController extends Controller
     public function destroy(Nhomnhac $nhomnhac){
         $nhomnhac->delete();
         return redirect()->route('nhomnhac.index')->with('thongbao', 'xoa thanh cong');
+    }
+
+
+    // nhóm nhạc view
+    public function nhomnhacall($id){
+        $users = User::find($id);
+        $nhomnhac = Nhomnhac::withCount('idol')->get();
+        return view('nhomnhac.nhomnhacall', compact('nhomnhac', 'users'));
     }
 }

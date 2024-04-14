@@ -6,7 +6,7 @@
             <div style="width: 500px;">
                 <img style="width: 400px;" src="{{asset('uploads/'.$pf->anhnd)}}" alt="">
                 <div style="border: 1px solid; margin-top: 20px; text-align: center;">
-                    <a style="text-decoration: none;" href="">Thay ảnh đại diện</a>
+                    <a style="text-decoration: none;" href="/suaanhnd/{{$pf->id}}/user/{{$us->id}}">Thay ảnh đại diện</a>
                 </div>
             </div>
             <div style="width: 500px;">
@@ -23,10 +23,13 @@
                     <div style="display: inline-block;width: 24px;height: 24px;background: #ddd;margin: 0 5px;"><img style="width: 25px;height: 25px;" src="http://127.0.0.1:8000/uploads/1705396030.jpg" alt=""></div>
                 </div>
                 <div style="border: 1px solid; text-align: center;">
-                    <a href="{{route('logout')}}">đăng xuất</a>
+                    <a style="text-decoration: none;" href="{{route('logout')}}">đăng xuất</a>
                 </div>
-                <div style="border: 1px solid; text-align: center;">
-                    <a href="{{route('views', $us->id)}}">quay lại trang chủ</a>
+                <div style="border: 1px solid; text-align: center; margin-top: 10px;">
+                    <a style="text-decoration: none;" href="/suattnd/{{$pf->id}}/user/{{$us->id}}">Thay đổi thông tin tài khoản</a>
+                </div>
+                <div style="border: 1px solid; text-align: center; margin-top: 10px;">
+                    <a style="text-decoration: none;" href="{{route('views', $us->id)}}">quay lại trang chủ</a>
                 </div>
             </div>
             @endforeach

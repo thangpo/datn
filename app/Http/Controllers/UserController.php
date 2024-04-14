@@ -382,6 +382,49 @@ public function themvideo(Request $request, $id1, $id2){
         return view('user.thempfnd', compact('users'));
     }
 
+    public function suaanhnd($id1, $id2){
+        $profile = Profile::find($id1);
+        $users = User::find($id2);
+        return view('user.suaanhnd', compact('users', 'profile'));
+    }
+
+    public function suattnd($id1, $id2){
+        $profile = Profile::find($id1);
+        $users = User::find($id2);
+        return view('user.suattnd', compact('users', 'profile'));
+    }
+
+    public function capnhatanh(Request $request, $id){
+        
+        $profile = Profile::find($id);
+        if($request->hasFile('anhnd')){
+            $image = $request->file('anhnd');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $imageName);
+            $profile->anhnd = $imageName;
+        }
+        $profile->save();
+
+        $users = User::where('id', $profile->users_id)->get();
+        $profile = Profile::where('id', $id)->get();    
+        return view('user.profilend', compact('users', 'profile'));
+    }
+
+    public function capnhatttnd(Request $request, $id){
+        
+        $profile = Profile::find($id);
+        $profile->tennd = $request->tennd;
+        $profile->tuoi = $request->tuoi;
+        $profile->diachi = $request->diachi;
+        $profile->sdt = $request->sdt;
+        $profile->gioitinh = $request->gioitinh;
+        $profile->save();
+
+        $users = User::where('id', $profile->users_id)->get();
+        $profile = Profile::where('id', $id)->get();    
+        return view('user.profilend', compact('users', 'profile'));
+    }
+
     public function pfnguoidung(UserRequest $request) {
         $profile = new Profile();
         $profile->users_id = $request->users_id;

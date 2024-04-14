@@ -157,7 +157,11 @@ Route::match(['get', 'post'], '/themprf/{id}', [UserController::class, 'themprf'
 //
 Route::match(['get', 'post'], '/anhchitiet/{id1}/user/{id2}', [UserController::class, 'anhchitiet'])->name('anhchitiet');
 Route::match(['get', 'post'], '/themanhid/{id1}/user/{id2}', [UserController::class, 'themanhid'])->name('themanhid');
-Route::match(['get', 'post'], '/themidanh/{id1}/user/{id2}', [UserController::class, 'themidanh'])->name('themidanh');
+Route::match(['get', 'post'], '/themanhid/{id1}/user/{id2}', [UserController::class, 'themanhid'])->name('themanhid');
+Route::match(['get', 'post'], '/suaanhnd/{id1}/user/{id2}', [UserController::class, 'suaanhnd'])->name('suaanhnd');
+Route::match(['get', 'post'], '/suattnd/{id1}/user/{id2}', [UserController::class, 'suattnd'])->name('suattnd');
+Route::put('/capnhatanh/{id}', [UserController::class, 'capnhatanh'])->name('capnhatanh');
+Route::put('/capnhatttnd/{id}', [UserController::class, 'capnhatttnd'])->name('capnhatttnd');
 Route::match(['get', 'post'], '/profilend/{id}', [UserController::class, 'profilend'])->name('profilend');
 Route::match(['get', 'post'], '/pfnguoidung', [UserController::class, 'pfnguoidung'])->name('pfnguoidung');
 Route::match(['get', 'post'], '/capnhatnd/{id}', [UserController::class, 'capnhatnd'])->name('capnhatnd');
@@ -191,7 +195,6 @@ Route::match(['get', 'post'], '/binhluanv/{id}', [BaidangController::class, 'bin
 Route::match(['get', 'post'], '/thembd/{id}', [BaidangController::class, 'thembd'])->name('thembd');
 Route::match(['get', 'post'], '/dangbai/{users_id}', [BaidangController::class, 'dangbai'])->name('dangbai');
 Route::match(['get', 'post'], '/timbinhluan/{id}', [BaidangController::class, 'timbinhluan'])->name('timbinhluan');
-
 Route::match(['get', 'post'], '/like/{baidang}', [LikeController::class, 'like'])->name('like');
 Route::match(['get', 'post'], '/vbinhluan/{id}', [BinhluanController::class, 'vbinhluan'])->name('vbinhluan');
 Route::match(['get', 'post'], '/ndbinhluan/{id1}/user/{id2}', [BinhluanController::class, 'ndbinhluan'])->name('ndbinhluan');
@@ -208,3 +211,6 @@ Route::get('/logout', [UserController::class, 'logout'])->name("logout");
 
 // thanh toán
 Route::match(['get', 'post'], '/thanhtoannao', [VexemController::class, 'thanhtoannao'])->name('thanhtoannao');
+
+// nhóm nhạc
+Route::match(['get', 'post'], '/nhomnhacall/{id}', [NhomnhacController::class, 'nhomnhacall'])->name('nhomnhacall');
