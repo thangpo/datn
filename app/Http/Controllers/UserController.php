@@ -68,7 +68,7 @@ class UserController extends Controller
         return redirect()->route('login');
     }
 
-    ///
+    ///themanhid
 
     public function hienthius($id1, $id2){
         $idols = Idol::find($id1);
@@ -126,7 +126,7 @@ class UserController extends Controller
         return view('trangnguoid.ttidol', compact('idol', 'users', 'nhomnhac', 'lichtrinh', 'theodoi', 'tdidol', 'nhac'));
     }
 
-
+    
     public function ctidolus($id1, $id2){
         $idol = Idol::find($id1);
         $usernd = User::find($id2);
@@ -143,8 +143,9 @@ class UserController extends Controller
         $tdidol = Idol::withCount('theodoi')->get();
 
         $theodoi = Theodoi::where('idol_id', $id1)->where('users_id', $id2)->first();
+        $anhtheoid = Anhtheoid::where('idol_id', $id1)->latest()->take(5)->get();
 
-        return view('trangnguoid.ttidol', compact('idol', 'users', 'nhomnhac', 'lichtrinh', 'usernd', 'theodoi', 'tdidol', 'nhac'));
+        return view('trangnguoid.ttidol', compact('idol', 'users', 'nhomnhac', 'lichtrinh', 'usernd', 'theodoi', 'tdidol', 'nhac', 'anhtheoid'));
     }
 
 
@@ -216,7 +217,7 @@ class UserController extends Controller
 
 
 
-//video ngắn
+//video ngắn chuyentiep
 
 
 public function videoxemct($id1, $id2){

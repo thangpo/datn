@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Idol;
 use App\Models\Nhomnhac;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\table;
 
 class NhomnhacController extends Controller
 {
@@ -65,7 +68,11 @@ class NhomnhacController extends Controller
     // nhóm nhạc view
     public function nhomnhacall($id){
         $users = User::find($id);
-        $nhomnhac = Nhomnhac::withCount('idol')->get();
-        return view('nhomnhac.nhomnhacall', compact('nhomnhac', 'users'));
+        $nhomnhac = DB::table('nhomnhac')->get();
+        $lichtrinh = DB::table('lichtrinh')->latest()->take(1)->get();
+        $banner = DB::table('tests_banner')->latest()->take(1)->get();
+        $baiviet = DB::table('baiviet')->latest()->take(1)->get();
+        $idol = DB::table('idol')->get();
+        return view('nhomnhac.nhomnhacall', compact('nhomnhac', 'users', 'idol', 'lichtrinh', 'banner', 'baiviet'));
     }
 }

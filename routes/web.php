@@ -128,7 +128,6 @@ Route::match(['get', 'post'], '/idol/themmoi/{id}', [IdolController::class, 'the
 Route::match(['get', 'post'], '/lichtrinh/hienthilt/{id}', [LichtrinhtController::class, 'hienthilt'])->name('hienthilt');
 Route::match(['get', 'post'], '/lichtrinh/themmoilt/{id}', [LichtrinhtController::class, 'themmoilt'])->name('themmoilt');
 
-
 // ve xem
 Route::match(['get', 'post'], '/themmoivx/{id}', [VexemController::class, 'themmoivx'])->name('themmoivx');
 Route::match(['get', 'post'], '/themvexem/{id}', [VexemController::class, 'themvexem'])->name('themvexem');
@@ -157,7 +156,7 @@ Route::match(['get', 'post'], '/themprf/{id}', [UserController::class, 'themprf'
 //
 Route::match(['get', 'post'], '/anhchitiet/{id1}/user/{id2}', [UserController::class, 'anhchitiet'])->name('anhchitiet');
 Route::match(['get', 'post'], '/themanhid/{id1}/user/{id2}', [UserController::class, 'themanhid'])->name('themanhid');
-Route::match(['get', 'post'], '/themanhid/{id1}/user/{id2}', [UserController::class, 'themanhid'])->name('themanhid');
+Route::match(['get', 'post'], '/themidanh/{id1}/user/{id2}', [UserController::class, 'themidanh'])->name('themidanh');
 Route::match(['get', 'post'], '/suaanhnd/{id1}/user/{id2}', [UserController::class, 'suaanhnd'])->name('suaanhnd');
 Route::match(['get', 'post'], '/suattnd/{id1}/user/{id2}', [UserController::class, 'suattnd'])->name('suattnd');
 Route::put('/capnhatanh/{id}', [UserController::class, 'capnhatanh'])->name('capnhatanh');

@@ -46,10 +46,11 @@
       <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
       <p style="font-size: 15px;">Xin chào: {{$profile->tennd}}</p>
     </a>
-    @endif
     @if(empty($profile))
     <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
     @endif
+    @endif
+    
 
 
 
