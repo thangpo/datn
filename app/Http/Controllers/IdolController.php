@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Idol;
 use App\Models\Nhomnhac;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -83,5 +84,55 @@ class IdolController extends Controller
     public function destroy(Idol $idol){
         $idol->delete();
         return redirect()->route('idol.index')->with('thongbao', 'xoa thanh cong');
+    }
+
+
+    public function suaanhid($id){   
+        $idol = Idol::find($id);
+        return view('idol.suaanh', compact('idol'));
+    }
+
+    public function capnhataid(Request $request, $id){
+        
+        $idol = Idol::find($id);
+        if($request->hasFile('anh')){
+            $image = $request->file('anh');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $imageName);
+            $idol->anh = $imageName;
+        }
+        $idol->save();
+        
+        $idol = Idol::find($id);
+        $users = User::where('idol_id', $idol->id)->get();    
+        $nhomnhac = Nhomnhac::where('id', $idol->nhomnhac_id)->get();
+        $idol = Idol::where('id', $id)->get();
+
+        return view('idol.thongtinx', compact('users', 'idol', 'nhomnhac'));
+    }
+
+    public function suattidol($id){   
+        $idol = Idol::find($id);
+        return view('idol.suattid', compact('idol'));
+    }
+
+    public function capnhatttidol(Request $request, $id){
+        
+        $idol = Idol::find($id);
+        $idol->nhomnhac_id = $request->nhomnhac_id;
+        $idol->tenid = $request->tenid;
+        $idol->tuoi = $request->tuoi;
+        $idol->qquan = $request->qquan;
+        $idol->chieucao = $request->chieucao;
+        $idol->cannang = $request->cannang;
+        $idol->gioitinh = $request->gioitinh;
+        $idol->save();
+        
+        $idol = Idol::find($id);
+        $users = User::where('idol_id', $idol->id)->get();    
+        $nhomnhac = Nhomnhac::where('id', $idol->nhomnhac_id)->get();
+        $idol = Idol::where('id', $id)->get();
+
+        return view('idol.thongtinx', compact('users', 'idol', 'nhomnhac'));
     }
 }

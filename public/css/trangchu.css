@@ -975,3 +975,186 @@ button {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
   }
+
+
+
+/*css của idol theo nhóm nhạc*/
+.wallet {
+  --bg-color: #ceb2fc;
+  --bg-color-light: #f0e7ff;
+  --text-color-hover: #fff;
+  --box-shadow-color: rgba(206, 178, 252, 0.48);
+}
+
+.card2 {
+  width: 320px;
+  height: 421px;
+  background: #fff;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease-out;
+  text-decoration: none;
+}
+
+.card2:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+
+.card2:hover .overlay {
+  transform: scale(4) translateZ(0);
+}
+
+.card2:hover .circle {
+  border-color: var(--bg-color-light);
+  background: var(--bg-color);
+}
+
+.card2:hover .circle:after {
+  background: var(--bg-color-light);
+}
+
+.card2:hover p {
+  color: var(--text-color-hover);
+}
+
+.card2 p {
+  font-size: 17px;
+  color: #4c5656;
+  margin-top: 30px;
+  z-index: 1000;
+  transition: color 0.3s ease-out;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+}
+
+.circle:after {
+  content: "";
+  width: 118px;
+  height: 118px;
+  display: block;
+  position: absolute;
+  background: var(--bg-color);
+  border-radius: 50%;
+  top: 7px;
+  left: 7px;
+  transition: opacity 0.3s ease-out;
+}
+
+.circle svg {
+  z-index: 10000;
+  transform: translateZ(0);
+}
+
+.overlay {
+  width: 118px;
+  position: absolute;
+  height: 118px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  top: 70px;
+  left: 50px;
+  z-index: 0;
+  transition: transform 0.3s ease-out;
+}
+
+/**/
+@keyframes lineAppear {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 2; }
+}
+
+.line {
+  opacity: 0;
+  animation: lineAppear 5s ease-in-out infinite;
+}
+
+.line1 { animation-delay: 1.5s; }
+.line2 { animation-delay: 2.5s; }
+.line3 { animation-delay: 3.5s; }
+
+
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.char {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideInDown 10s forwards infinite;
+}
+
+@keyframes slideInDown {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.tracking-in-expand-fwd {
+	-webkit-animation: tracking-in-expand-fwd 8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand-fwd 8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+ @-webkit-keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px);
+            transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px);
+            transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+/**/

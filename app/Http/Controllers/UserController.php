@@ -27,7 +27,7 @@ use function Laravel\Prompts\table;
 
 class UserController extends Controller
 {
-    // Đăng nhập
+    // Đăng nhập anhchitiet hoadon
     public function login(UserRequest $request) {
         if ($request->isMethod('POST')) {
             // Sử dụng thằng Auth::attempt kiểm tra thông tin đăng nhập
@@ -122,8 +122,9 @@ class UserController extends Controller
             ->join('idol','idol.id','=','theodoi.idol_id')
             ->select('theodoi.*','idol_id')->get();
         $tdidol = Idol::withCount('theodoi')->get();
+        $anhtheoid = Anhtheoid::where('idol_id', $id1)->latest()->take(5)->get();
 
-        return view('trangnguoid.ttidol', compact('idol', 'users', 'nhomnhac', 'lichtrinh', 'theodoi', 'tdidol', 'nhac'));
+        return view('trangnguoid.ttidol', compact('idol', 'users', 'nhomnhac', 'lichtrinh', 'theodoi', 'tdidol', 'nhac', 'anhtheoid'));
     }
 
     
@@ -163,7 +164,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-// ảnh id
+// ảnh id profilend
     public function anhchitiet($id1, $id2){
         $idol = Idol::find($id1);
         $nhomnhac = Nhomnhac::where('id', $idol->nhomnhac_id)->first();
@@ -449,6 +450,8 @@ public function themvideo(Request $request, $id1, $id2){
         return view('user.profilend', compact('users', 'profile'));
     }
 
+
+    //ttidol
 
      public function capnhatnd(Request $request, $id){
         

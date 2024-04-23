@@ -1,0 +1,207 @@
+.fancy {
+    background-color: transparent;
+    border: 2px solid #000;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 1.25em 2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    transition: all 0.3s ease-in-out;
+    user-select: none;
+    font-size: 13px;
+   }
+   
+   .fancy::before {
+    content: " ";
+    width: 1.5625rem;
+    height: 2px;
+    background: black;
+    top: 50%;
+    left: 1.5em;
+    position: absolute;
+    transform: translateY(-50%);
+    transform-origin: center;
+    transition: background 0.3s linear, width 0.3s linear;
+   }
+   
+   .fancy .text {
+    font-size: 1.125em;
+    line-height: 1.33333em;
+    padding-left: 2em;
+    display: block;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+   }
+   
+   .fancy .top-key {
+    height: 2px;
+    width: 1.5625rem;
+    top: -2px;
+    left: 0.625rem;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, left 0.3s ease-out;
+   }
+   
+   .fancy .bottom-key-1 {
+    height: 2px;
+    width: 1.5625rem;
+    right: 1.875rem;
+    bottom: -2px;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, right 0.3s ease-out;
+   }
+   
+   .fancy .bottom-key-2 {
+    height: 2px;
+    width: 0.625rem;
+    right: 0.625rem;
+    bottom: -2px;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, right 0.3s ease-out;
+   }
+   
+   .fancy:hover {
+    color: white;
+    background: black;
+   }
+   
+   .fancy:hover::before {
+    width: 0.9375rem;
+    background: white;
+   }
+   
+   .fancy:hover .text {
+    color: white;
+    padding-left: 1.5em;
+   }
+   
+   .fancy:hover .top-key {
+    left: -2px;
+    width: 0px;
+   }
+   
+   .fancy:hover .bottom-key-1,
+    .fancy:hover .bottom-key-2 {
+    right: 0;
+    width: 0;
+   }
+   
+   button {
+     padding: 0.9em 1.8em;
+     text-transform: uppercase;
+     text-decoration: none;
+     letter-spacing: 4px;
+     width: 300px;
+     color: transparent;
+     border: 3px solid #ff0;
+     font-size: 14px;
+     position: relative;
+     font-family: inherit;
+     background: transparent;
+     cursor: pointer;
+   }
+   
+   button::before {
+     content: "Mua";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: #363636;
+     color: #ff0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     transition: all 0.5s;
+   }
+   
+   button:hover::before {
+     left: 100%;
+     transform: scale(0) rotateY(360deg);
+     opacity: 0;
+   }
+   
+   button::after {
+     content: "Chốt nào";
+     position: absolute;
+     top: 0;
+     left: -100%;
+     width: 100%;
+     height: 100%;
+     background-color: #363636;
+     color: #ff0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     transition: all 0.5s;
+     transform: scale(0) rotateY(0deg);
+     opacity: 0;
+   }
+   
+   button:hover::after {
+     left: 0;
+     transform: scale(1) rotateY(360deg);
+     opacity: 1;
+   }
+   
+   .btn {
+     border: none;
+     width: 15em;
+     height: 5em;
+     border-radius: 3em;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 12px;
+     background: #1C1A1C;
+     cursor: pointer;
+     transition: all 450ms ease-in-out;
+   }
+   
+   .sparkle {
+     fill: #AAAAAA;
+     transition: all 800ms ease;
+   }
+   
+   .text {
+     font-weight: 600;
+     color: #AAAAAA;
+     font-size: medium;
+   }
+   
+   .btn:hover {
+     background: linear-gradient(0deg,#A47CF3,#683FEA);
+     box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+     inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+     0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+     0px 0px 180px 0px #9917FF;
+     transform: translateY(-2px);
+   }
+   
+   .btn:hover .text {
+     color: white;
+   }
+   
+   .btn:hover .sparkle {
+     fill: white;
+     transform: scale(1.2);
+   } 
+   

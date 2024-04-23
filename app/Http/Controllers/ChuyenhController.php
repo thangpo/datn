@@ -72,12 +72,17 @@ class ChuyenhController extends Controller
 
 
     
-    public function hienthict($id){
-        $nhomnhac = Nhomnhac::where('id', $id)->first();
+    public function hienthict($id1, $id2){
+        $nhomnhac = Nhomnhac::where('id', $id1)->first();
         $idol = Idol::where('nhomnhac_id', $nhomnhac->id)->latest()->take(7)->get();
         $baihat = Baihat::where('nhomnhac_id', $nhomnhac->id)->get();
         $lichtrinh = Lichtrinh::where('nhomnhac_id', $nhomnhac->id)->get();
-        $nhomnhac = Nhomnhac::where('id', $id)->get();
-        return view('trangnguoid.nhomnhacct', compact('idol', 'nhomnhac', 'baihat', 'lichtrinh'));
+        $idols = Idol::where('nhomnhac_id', $nhomnhac->id)->get();
+        $nhomnhac = Nhomnhac::where('id', $id1)->get();
+        $users = User::where('id', $id2)->get();
+        $usernd = User::find($id2);
+        $profile = Profile::where('users_id', $usernd->id)->first();
+        $idolsl = Idol::where('id', $usernd->idol_id)->first();
+        return view('trangnguoid.nhomnhacct', compact('idol', 'nhomnhac', 'baihat', 'lichtrinh', 'idols', 'users', 'profile', 'idolsl'));
     }
 }

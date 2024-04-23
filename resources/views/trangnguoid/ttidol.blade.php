@@ -211,7 +211,7 @@
 
       @if(empty($usernd))
       <div class="button">
-        <a href="{{route('login')}}">Đăng nhập để theo dõi</a>
+        <a href="{{route('login')}}" style="text-decoration: none; color: white;">Đăng nhập để theo dõi</a>
       </div>
       @foreach ($tdidol as $td)
       @if($td->id == $nn->id)
@@ -245,8 +245,8 @@
 
             <div class="content">
                 <span class="title">Nhóm nhạc: ({{$nhomnhac->tennn}})</span>
-                <span class="text">Chiều cao: <strong>{{$nn->chieucao}}cm || Tuổi thần tượng: <strong>{{$nn->tuoi}}</span>
-                <span class="text">cân nặng: <strong>{{$nn->cannang}}KG || Quê quán: <strong>{{$nn->qquan}}</span>
+                <span style="color: #00894d;">Chiều cao: <strong>{{$nn->chieucao}}cm || Tuổi thần tượng: <strong>{{$nn->tuoi}}</span>
+                <span style="color: #00894d;">cân nặng: <strong>{{$nn->cannang}}KG || Quê quán: <strong>{{$nn->qquan}}</span>
             </div>
 
             <div class="bottom">

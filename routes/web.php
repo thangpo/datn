@@ -47,9 +47,12 @@ Route::resource('/baiviet', BaivietController::class);
 Route::match(['get', 'post'], '/themidol/{id}', [IdolController::class, 'themidol'])->name('themidol');
 Route::match(['get', 'post'], '/themnhacmoi/{id}', [NhacController::class, 'themnhacmoi'])->name('themnhacmoi');
 Route::match(['get', 'post'], '/themmoimv/{id}', [BaihatController::class, 'themmoimv'])->name('themmoimv');
+Route::match(['get', 'post'], '/suaanhid/{id}', [IdolController::class, 'suaanhid'])->name('suaanhid');
+Route::put('/capnhataid/{id}', [IdolController::class, 'capnhataid'])->name('capnhataid');
+Route::match(['get', 'post'], '/suattidol/{id}', [IdolController::class, 'suattidol'])->name('suattidol');
+Route::put('/capnhatttidol/{id}', [IdolController::class, 'capnhatttidol'])->name('capnhatttidol');
 
-
-//bài viết
+//bài viết anhchitiet
 Route::match(['get', 'post'], '/baivietall', [BaivietController::class, 'baivietall'])->name('baivietall');
 Route::match(['get', 'post'], '/thembaiviet', [BaivietController::class, 'thembaiviet'])->name('thembaiviet');
 Route::match(['get', 'post'], '/thembai', [BaivietController::class, 'thembai'])->name('thembai');
@@ -121,14 +124,14 @@ Route::match(['get', 'post'], '/ablikenhac/{id1}', [NhacController::class, 'abli
 Route::match(['get', 'post'], '/chuyenh/hienthi/{id}', [ChuyenhController::class, 'hienthi'])->name('hienthi');
 Route::match(['get', 'post'], '/baihatview', [ChuyenhController::class, 'baihatview'])->name('baihatview');
 Route::match(['get', 'post'], '/views/{id}', [ChuyenhController::class, 'views'])->name('views');
-Route::match(['get', 'post'], '/chuyenh/hienthict/{id}', [ChuyenhController::class, 'hienthict'])->name('hienthict');
+Route::match(['get', 'post'], '/hienthict/{id1}/user/{id2}', [ChuyenhController::class, 'hienthict'])->name('hienthict');
 
 // lich trinh
 Route::match(['get', 'post'], '/idol/themmoi/{id}', [IdolController::class, 'themmoi'])->name('themmoi');
 Route::match(['get', 'post'], '/lichtrinh/hienthilt/{id}', [LichtrinhtController::class, 'hienthilt'])->name('hienthilt');
 Route::match(['get', 'post'], '/lichtrinh/themmoilt/{id}', [LichtrinhtController::class, 'themmoilt'])->name('themmoilt');
 
-// ve xem
+// ve xem thongtindv thongtinbuild hoadon
 Route::match(['get', 'post'], '/themmoivx/{id}', [VexemController::class, 'themmoivx'])->name('themmoivx');
 Route::match(['get', 'post'], '/themvexem/{id}', [VexemController::class, 'themvexem'])->name('themvexem');
 Route::match(['get', 'post'], '/vexemtt', [VexemController::class, 'vexemtt'])->name('vexemtt');
@@ -144,13 +147,13 @@ Route::match(['get', 'post'], '/congdiens/{id}', [VexemController::class, 'congd
 Route::match(['get', 'post'], '/emailcamon', [VexemController::class, 'emailcamon'])->name('emailcamon');
 
 
-// users route
+// users route viewvexem
 Route::match(['get', 'post'], '/hienthius/{id1}/nhomnhac/{id2}', [UserController::class, 'hienthius'])->name('hienthius');
 Route::match(['get', 'post'], '/themus/{id1}/nhomnhac/{id2}', [UserController::class, 'themus'])->name('themus');
 Route::match(['get', 'post'], '/taikhoant', [UserController::class, 'taikhoant'])->name('taikhoant');
 
 
-// profile idol tài khoản
+// profile idol tài khoản profilend ttidol thongtindv hienthict
 Route::match(['get', 'post'], '/chuyentiep/{id}', [UserController::class, 'chuyentiep'])->name('chuyentiep');
 Route::match(['get', 'post'], '/themprf/{id}', [UserController::class, 'themprf'])->name('themprf');
 //

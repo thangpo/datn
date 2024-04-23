@@ -50,7 +50,7 @@
     <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
     @endif
     @endif
-    
+
 
 
 
@@ -127,9 +127,11 @@
 
     <div class="grup-tombol">
       <a class="a1" href="{{route('gioithieu')}}">Xem chi tiết</a>
+      @if(empty($users) != 'Null')
       @foreach ($users as $us)
       <a class="a1" href="{{route('nhomnhacall', $us->id)}}">Xem nhóm nhạc</a>
       @endforeach
+      @endif
     </div>
 
     <div class="sosmed">
@@ -144,7 +146,19 @@
   </div>
 </section>
 
-<h1 class="h11" style="margin-top: 20px;">Bài hát mới</h1>
+<div class="container2" style="text-align: center; width: 1000px;">
+    <span class="char" style="animation-delay: 0s;"><h1 class="h11">B</h1></span>
+    <span class="char" style="animation-delay: 0.5s;"><h1 class="h11">à</h1></span>
+    <span class="char" style="animation-delay: 1.5s;"><h1 class="h11">i</h1></span>
+    <span class="char" style="animation-delay: 2.5s;"><h1 class="h11">h</h1></span>
+    <span class="char" style="animation-delay: 3.5s;"><h1 class="h11">á</h1></span>
+    <span class="char" style="animation-delay: 4.5s;"><h1 class="h11">t</h1></span>
+    <span class="char" style="animation-delay: 6.5s;"><h1 class="h11">m</h1></span>
+    <span class="char" style="animation-delay: 7.5s;"><h1 class="h11">ớ</h1></span>
+    <span class="char" style="animation-delay: 8.5s;"><h1 class="h11">i</h1></span>
+    <!-- Thêm các chữ tiếp theo với thời gian delay tăng dần -->
+  </div>
+
 <div class="body3">
   <div class="container3">
     @foreach ($baihat as $bh)
@@ -171,12 +185,25 @@
 @foreach($nhomnhac as $nn)
 <div class="body">
   <div class="container">
-    <h1 class="h11">Thành viên nhóm nhạc: BEJ48</h1>
+    <h1 class="tracking-in-expand-fwd">Thành viên nhóm nhạc: {{$nn->tennn}}</h1>
     @foreach ($idol as $id)
     @if($id->nhomnhac_id == $nn->id)
     <div class="boxa1 filter Camara">
-      <a href="{{route('ttidol', $id->id)}}"><img class="imga" src="{{asset('uploads/'.$id->anh)}}" alt=""></a>
+      <!---->
+      <a href="{{route('ttidol', $id->id)}}">
+        <div class="card2 wallet">
+          <div class="overlay"></div>
+          <div class="circle">
+            <img class="circle" src="{{asset('uploads/'.$id->anh)}}" alt="">
+          </div>
+          <p>{{$id->tenid}}</p>
+        </div>
+      </a>
+      <!---->
     </div>
+
+
+
     @endif
     @endforeach
   </div>
@@ -190,11 +217,19 @@
 @foreach($nhomnhac as $nn)
 <div class="body">
   <div class="container">
-    <h1 class="h11">Thành viên nhóm nhạc: BEJ48</h1>
+    <h1 class="tracking-in-expand-fwd">Thành viên nhóm nhạc: {{$nn->tennn}}</h1>
     @foreach ($idol as $id)
     @if($id->nhomnhac_id == $nn->id)
     <div class="boxa1 filter Camara">
-      <a href="/ctidolus/{{$id->id}}/user/{{$usernd->id}}"><img class="imga" src="{{asset('uploads/'.$id->anh)}}" alt=""></a>
+      <a href="/ctidolus/{{$id->id}}/user/{{$usernd->id}}">
+        <div class="card2 wallet">
+          <div class="overlay"></div>
+          <div class="circle">
+            <img class="circle" src="{{asset('uploads/'.$id->anh)}}" alt="">
+          </div>
+          <p>{{$id->tenid}}</p>
+        </div>
+      </a>
     </div>
     @endif
     @endforeach
@@ -574,13 +609,19 @@
 
 <div class="body2">
   <div class="iia">
-    <h1 class="h11">CÁC NHÓM NHẠC THUỘC CÔNG TY</h1>
-    <div class="idol">
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <div class="line line1"><h1 class="h11">CÁC NHÓM</h1></div>
+      <div class="line line2"><h1 class="h11">NHẠC THUỘC</h1></div>
+      <div class="line line3"><h1 class="h11">CÔNG TY</h1></div>
+    </div>
+    <div class="idol" style="margin-top: 20px;">
       @foreach ($nhomnhac as $nl)
+      @foreach($users as $us)
       <div class="idol2">
-        <a href="{{route('hienthict', $nl->id)}}"><img src="{{asset('uploads/'.$nl->logonn)}}" style="width: 200px; height: 200px;" class="card-img-top" alt="..."></a>
+        <a href="/hienthict/{{$nl->id}}/user/{{$us->id}}"><img src="{{asset('uploads/'.$nl->logonn)}}" style="width: 200px; height: 200px;" class="card-img-top" alt="..."></a>
         <h3 class="h31">{{$nl->tennn}}</h3>
       </div>
+      @endforeach
       @endforeach
     </div>
   </div>

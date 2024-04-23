@@ -23,7 +23,7 @@ class VexemController extends Controller
         return view('vexem.vexem', compact('lichtrinh', 'vexem', 'lichtrinhs'));
     }
 
-
+// thongtindv thongtindv
     public function themvexem($id){
         $lichtrinh = Lichtrinh::find($id);
         return view('vexem.themvexe', compact('lichtrinh'));

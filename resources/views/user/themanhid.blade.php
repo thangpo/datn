@@ -5,87 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 body {font-family: Arial, sans-serif;margin: 0;padding: 0;}.profile-container {width: 100%;max-width: 600px;margin: 0 auto;padding: 20px;}.profile-header {display: flex;align-items: center;margin-bottom: 20px;}.profile-picture {width: 120px;height: 120px;border-radius: 50%;object-fit: cover;margin-right: 20px;}.profile-info {flex: 1;}.follow-info {display: flex;justify-content: space-between;margin-bottom: 10px;}.profile-description {margin-bottom: 20px;}.video-container {position: relative;padding-bottom: 56.25%;padding-top: 30px;height: 0;overflow: hidden;}.video-container iframe {position: absolute;top: 0;left: 0;width: 100%;height: 100%;}.profile-actions {display: flex;flex-direction: column;}.edit-profile-button {margin-bottom: 10px;}.link {margin-bottom: 5px;}
-.cta {
-  display: flex;
-  padding: 11px 33px;
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
-  font-size: 25px;
-  color: white;
-  background: #6225E6;
-  transition: 1s;
-  box-shadow: 6px 6px 0 black;
-  transform: skewX(-15deg);
-  border: none;
-}
-
-.cta:focus {
-  outline: none;
-}
-
-.cta:hover {
-  transition: 0.5s;
-  box-shadow: 10px 10px 0 #FBC638;
-}
-
-.cta .second {
-  transition: 0.5s;
-  margin-right: 0px;
-}
-
-.cta:hover  .second {
-  transition: 0.5s;
-  margin-right: 45px;
-}
-
-.span {
-  transform: skewX(15deg)
-}
-
-.second {
-  width: 20px;
-  margin-left: 30px;
-  position: relative;
-  top: 12%;
-}
-
-.one {
-  transition: 0.4s;
-  transform: translateX(-60%);
-}
-
-.two {
-  transition: 0.5s;
-  transform: translateX(-30%);
-}
-
-.cta:hover .three {
-  animation: color_anim 1s infinite 0.2s;
-}
-
-.cta:hover .one {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.6s;
-}
-
-.cta:hover .two {
-  transform: translateX(0%);
-  animation: color_anim 1s infinite 0.4s;
-}
-
-@keyframes color_anim {
-  0% {
-    fill: white;
-  }
-
-  50% {
-    fill: #FBC638;
-  }
-
-  100% {
-    fill: white;
-  }
-}   
+.cta {display: flex;padding: 11px 33px;text-decoration: none;font-family: 'Poppins', sans-serif;font-size: 25px;color: white;background: #6225E6;transition: 1s;box-shadow: 6px 6px 0 black;transform: skewX(-15deg);border: none;}
+.cta:focus {outline: none;}.cta:hover {transition: 0.5s;box-shadow: 10px 10px 0 #FBC638;}
+.cta .second { transition: 0.5s;margin-right: 0px;}.cta:hover  .second { transition: 0.5s;margin-right: 45px;}.span {transform: skewX(15deg)}
+.second {width: 20px;margin-left: 30px;position: relative;top: 12%;}.one {transition: 0.4s;transform: translateX(-60%);}
+.two {transition: 0.5s;transform: translateX(-30%);}.cta:hover .three {animation: color_anim 1s infinite 0.2s;}.cta:hover .one {transform: translateX(0%);animation: color_anim 1s infinite 0.6s;}.cta:hover .two {transform: translateX(0%);animation: color_anim 1s infinite 0.4s;}
+@keyframes color_anim {0% {fill: white;}50% {fill: #FBC638;}100% {fill: white;}}   
     </style>
     <title>Profile Page</title>
 </head>
@@ -142,7 +67,7 @@ body {font-family: Arial, sans-serif;margin: 0;padding: 0;}.profile-container {w
             @if(empty($anhtheoid) != 'Null')
             @foreach($anhtheoid as $atid)
                 <div style="">
-                        <div style="border: 1px solid; height: 30px; text-align: center;">
+                        <div style="height: 30px; text-align: center;">
                         @php
                             $anhid = json_decode($atid->anhid);
                         @endphp
