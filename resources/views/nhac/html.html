@@ -1,0 +1,139 @@
+<style>
+    #music-player {
+        /* Định dạng cho player */
+    }
+
+    #progress-container {
+        width: 100%;
+        height: 5px;
+        background: #ddd;
+        cursor: pointer;
+    }
+
+    #progress {
+        width: 0;
+        height: 100%;
+        background: #2196F3;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04AA6D;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04AA6D;
+        cursor: pointer;
+    }
+</style>
+
+<div id="music-player">
+    <audio id="audio">
+        <source src="http://127.0.0.1:8000/audio/1703925933.mp3" type="audio/mpeg">
+        <source src="http://127.0.0.1:8000/audio/1703926398.mp3" type="audio/mpeg">
+    </audio>
+    <div id="progress-container">
+        <div id="progress"></div>
+    </div>
+    <span id="current-time">00:00</span>/<span id="duration">00:00</span>
+    <button onclick="playAudio()" type="button">Phát</button>
+    <button onclick="pauseAudio()" type="button">Dừng</button>
+    <button onclick="nextSong()" type="button">Bài Tiếp Theo</button>
+    <input type="range" min="0" max="100" value="50" class="slider" id="volumeSlider">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var audio = document.getElementById('audio');
+        var progressContainer = document.getElementById('progress-container');
+        var progress = document.getElementById('progress');
+        var currentTime = document.getElementById('current-time');
+        var duration = document.getElementById('duration');
+
+        // Khi metadata được tải, cập nhật thời lượng bài hát
+        audio.addEventListener('loadedmetadata', function () {
+            duration.textContent = formatTime(audio.duration);
+        });
+
+        // Cập nhật thanh tiến trình khi bài hát phát
+        audio.addEventListener('timeupdate', function () {
+            var percentage = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = percentage + '%';
+            currentTime.textContent = formatTime(audio.currentTime);
+        });
+
+        // Nhấp vào thanh tiến trình để tua bài hát
+        progressContainer.addEventListener('click', function (e) {
+            var percent = e.offsetX / this.offsetWidth;
+            audio.currentTime = percent * audio.duration;
+        });
+
+        // Hàm định dạng thời gian từ giây sang mm:ss
+        function formatTime(seconds) {
+            var min = Math.floor(seconds / 60);
+            var sec = Math.floor(seconds % 60);
+            return min + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+    });
+
+    // Lấy phần tử audio
+    var myAudio = document.getElementById("audio");
+
+    // Hàm để phát nhạc
+    function playAudio() {
+        myAudio.play();
+    }
+
+    // Hàm để dừng nhạc
+    function pauseAudio() {
+        myAudio.pause();
+    }
+
+    // Lấy phần tử slider
+    var volumeSlider = document.getElementById("volumeSlider");
+
+    // Cập nhật âm lượng khi slider thay đổi
+    volumeSlider.oninput = function () {
+        // Giả sử bạn có một phần tử audio với id là 'myAudio'
+        var audio = document.getElementById("audio");
+        audio.volume = this.value / 100;
+    }
+
+    // Mảng chứa đường dẫn đến các bài hát
+    var songs = ["http://127.0.0.1:8000/audio/1703925933.mp3", "http://127.0.0.1:8000/audio/1703926398.mp3", /* Thêm các bài hát khác vào đây */];
+    var currentSongIndex = 0;
+    var audio = document.getElementById("audio");
+
+    // Hàm để chuyển sang bài hát tiếp theo
+    function nextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        audio.src = songs[currentSongIndex];
+        audio.load();
+        audio.play();
+    }
+
+</script>

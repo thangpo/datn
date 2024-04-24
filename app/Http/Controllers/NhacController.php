@@ -130,7 +130,7 @@ class NhacController extends Controller
        return view('trangnguoid.nhac', compact('nhacs','nhac', 'nhomnhac', 'nhomnhacv', 'users', 'profile'));
     }
 
-    // chuyển bài hát
+    // chuyển bài hát nhomnhacnd
     public function playnext($id1, $id2){
        $users = User::find($id2);
        $profile = Profile::where('users_id', $users->id)->get();
@@ -420,6 +420,7 @@ class NhacController extends Controller
     return view('nhac.likenhac', compact('nhac', 'nhomnhac', 'users'));
  }
 
+ //nhactheonhom
  public function nhomnhacct($id1){
     $nhac = DB::table('nhac')->get();
     $nhomnhac = Nhomnhac::find($id1);
@@ -442,8 +443,11 @@ class NhacController extends Controller
     $nhomnhac = Nhomnhac::where('id', $nhach->nhomnhac_id)->get();
     foreach ($nhomnhac as $n){
         $nhac = Nhac::where('nhomnhac_id', $n->id)->get();
+        $nhaci = Nhac::where('nhomnhac_id', $n->id)->pluck('nhac');
+        $nhact = Nhac::where('nhomnhac_id', $n->id)->pluck('tenn');
+        $nhaca = Nhac::where('nhomnhac_id', $n->id)->pluck('anh');
     }
-    return view('nhac.likenhac', compact('nhach', 'nhomnhac', 'users', 'nhac'));
+    return view('nhac.likenhac', compact('nhach', 'nhomnhac', 'users', 'nhac', 'nhaci', 'nhact', 'nhaca'));
  }
 
  public function abumtknd($id1, $id2){

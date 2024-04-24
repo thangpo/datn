@@ -120,7 +120,7 @@ Route::match(['get', 'post'], '/ablikenhac/{id1}', [NhacController::class, 'abli
 
 
 
-// route di chuyển
+// route di chuyển nhomnhacnd
 Route::match(['get', 'post'], '/chuyenh/hienthi/{id}', [ChuyenhController::class, 'hienthi'])->name('hienthi');
 Route::match(['get', 'post'], '/baihatview', [ChuyenhController::class, 'baihatview'])->name('baihatview');
 Route::match(['get', 'post'], '/views/{id}', [ChuyenhController::class, 'views'])->name('views');
