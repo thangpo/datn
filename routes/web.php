@@ -86,7 +86,7 @@ Route::match(['get', 'post'], '/chitietthongbao/{id}', [BaihatController::class,
 
 
 
-// nhạc
+// nhạc nhomnhacnd thumucnhac tgalbum binhluannhac
 Route::match(['get', 'post'], '/hienthin/{id}', [NhacController::class, 'hienthin'])->name('hienthin');
 Route::match(['get', 'post'], '/hienthinus/{id}', [NhacController::class, 'hienthinus'])->name('hienthinus');
 Route::match(['get', 'post'], '/likenhac/{nhac}', [NhacController::class, 'likenhac'])->name('likenhac');

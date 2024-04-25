@@ -173,7 +173,7 @@ audio::-webkit-media-controls-volume-slider::-webkit-slider-thumb {width: 10px;h
 
         @if (empty($users) != 'Null')
         @if (empty($nhacs) != 'Null')
-        <a href="{{route('tgalbum', $nhacs->id)}}">
+        <a href="{{route('tgalbum', $users->id)}}">
           <div class="App__category-item">
               <div class="icon"><svg role="img" height="12" width="12" aria-hidden="true" viewBox="0 0 16 16" fill="#c4c4c4"><path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z"></path><path fill="none" d="M0 0h16v16H0z"></path></svg>
               </div>

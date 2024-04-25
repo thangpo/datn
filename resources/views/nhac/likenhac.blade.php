@@ -201,9 +201,9 @@
       </svg>
       <!--Tim bài hát-->
       <div class="air"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none" height="20" width="24">
+      <button id="repeat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none" height="20" width="24">
         <path d="M3.343 7.778a4.5 4.5 0 0 1 7.339-1.46L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 20.364l-7.682-7.682a4.501 4.501 0 0 1-.975-4.904Z"></path>
-      </svg>
+      </svg></button> 
     </div>
     <!--thanh thời gian-->
     <div id="progress-container">
@@ -302,19 +302,49 @@
     document.getElementById('tennhac').innerText = songTitle[currentSong];
     audio.load();
     audio.play();
+    //audio.addEventListener('ended', nextSong);
   }
-  var previousSong = null;
-
   // Hàm để chuyển sang bài hát vừa nghe
   function switchToPreviousSong() {
-      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-      currentSongImage = (currentSongIndex - 1 + songImage.length) % songImage.length;
-      currentSong = (currentSongIndex - 1 + songTitle.length) % songTitle.length;
-      // đường đẫn đến file nhạc
-      audio.src = "{{ asset('audio/') }}/" + songs[currentSongIndex];
-      image.src = "{{ asset('uploads/') }}/" + songImage[currentSongImage];
-      document.getElementById('tennhac').innerText = songTitle[currentSong];
-      audio.load();
-      audio.play();
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    currentSongImage = (currentSongIndex - 1 + songImage.length) % songImage.length;
+    currentSong = (currentSongIndex - 1 + songTitle.length) % songTitle.length;
+    // đường đẫn đến file nhạc
+    audio.src = "{{ asset('audio/') }}/" + songs[currentSongIndex];
+    image.src = "{{ asset('uploads/') }}/" + songImage[currentSongImage];
+    document.getElementById('tennhac').innerText = songTitle[currentSong];
+    audio.load();
+    audio.play();
   }
+  
+
+  //Đối tượng Audio
+  var repeatButton = document.getElementById('repeat'); // Nút lặp lại
+  var isRepeat = false; // Trạng thái lặp lại
+  var audio = document.getElementById("audio");
+  // Hàm để lặp lại bài hát
+  function repeatSong() {
+    if (isRepeat) {
+      audio.currentTime = 0; // Đặt thời gian hiện tại của bài hát về 0
+      audio.play(); // Phát lại bài hát
+    }
+  }
+
+  // Thêm sự kiện 'ended' cho đối tượng Audio
+  audio.addEventListener('ended', repeatSong);
+
+  // Hàm để bật/tắt chức năng lặp lại
+  function toggleRepeat() {
+    isRepeat = !isRepeat; // Đảo ngược trạng thái lặp lại
+    if (isRepeat) {
+      repeatButton.textContent = 'Tắt lặp lại';
+    } else {
+      repeatButton.textContent = 'Lặp lại';
+    }
+  }
+
+  // Thêm sự kiện 'click' cho nút lặp lại
+  repeatButton.addEventListener('click', toggleRepeat);
+
+  //audio.addEventListener('ended', nextSong);
 </script>
