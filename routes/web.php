@@ -216,3 +216,4 @@ Route::match(['get', 'post'], '/thanhtoannao', [VexemController::class, 'thanhto
 
 // nhóm nhạc
 Route::match(['get', 'post'], '/nhomnhacall/{id}', [NhomnhacController::class, 'nhomnhacall'])->name('nhomnhacall');
+
