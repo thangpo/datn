@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/viewvexem.css') }}">
 <div>
+    <a style="text-decoration: none;" href="{{url()->previous()}}">Quay lại</a>
     <h1 style="font-size: 30xp; text-align: center;">Vé nhạc biểu diễn của các nhóm nhạc</h1>
 
     <!--Vé xem nhạc-->

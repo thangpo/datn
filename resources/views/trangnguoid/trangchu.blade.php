@@ -616,12 +616,14 @@
     </div>
     <div class="idol" style="margin-top: 20px;">
       @foreach ($nhomnhac as $nl)
+      @if(isset($users) != NULL)
       @foreach($users as $us)
       <div class="idol2">
         <a href="/hienthict/{{$nl->id}}/user/{{$us->id}}"><img src="{{asset('uploads/'.$nl->logonn)}}" style="width: 200px; height: 200px;" class="card-img-top" alt="..."></a>
         <h3 class="h31">{{$nl->tennn}}</h3>
       </div>
       @endforeach
+      @endif
       @endforeach
     </div>
   </div>

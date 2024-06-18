@@ -84,13 +84,15 @@
         </a>
         <span class="tooltip">Quản lý nhạc</span>
       </li>
+@if(auth()->check())
       <li>
-        <a href="{{route('chuyenh.index')}}">
+        <a href="{{route('views', auth()->user()->id)}}">
           <i class='bx bx-home'></i>
           <span class="links_name">view</span>
         </a>
         <span class="tooltip">view</span>
       </li>
+@endif
     </ul>
     <div class="content1">
       <div class="user">

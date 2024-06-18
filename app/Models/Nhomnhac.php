@@ -11,6 +11,7 @@ class Nhomnhac extends Model
     protected $table = 'nhomnhac';
 
     protected $fillable = [
+        'xoa_mem',
         'tennn',
         'logonn',
         'sltv',

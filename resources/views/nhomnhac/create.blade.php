@@ -25,6 +25,7 @@
                 <div style="display: flex; gap: 20px;">
 
                     <div>
+                    <input type="text" value="0" name="xoa_mem" style="display: none;">
                                 <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
                                 <strong>Tên nhóm nhạc</strong><br>
                                     <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="text" name="tennn" class="form-control" placeholder="Nhập tên sản phẩm">
