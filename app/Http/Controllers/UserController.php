@@ -13,8 +13,10 @@ use App\Models\Likevideon;
 use App\Models\Nhac;
 use App\Models\Nhomnhac;
 use App\Models\Profile;
+use App\Models\Thanhtoanvip;
 use App\Models\Theodoi;
 use App\Models\User;
+use App\Models\UserVip;
 use App\Models\Videongan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -204,7 +206,7 @@ class UserController extends Controller
     {
         $idol = Idol::find($id1);
         $usernd = User::find($id2);
-        $users = User::where('idol_id', $idol->id)->get();
+        $users = User::where('idol_id', $idol->id)->first();
         $idol = Idol::where('id', $id1)->get();
         foreach ($idol as $id) {
             $nhomnhac = Nhomnhac::where('id', $id->nhomnhac_id)->first();
@@ -462,9 +464,10 @@ class UserController extends Controller
     public function profilend($id)
     {
         $users = User::where('id', $id)->first();
-        $profile = Profile::where('users_id', $users->id)->get();
-        $users = User::where('id', $id)->get();
-        return view('user.profilend', compact('users', 'profile'));
+        $thanhtoan = Thanhtoanvip::where('id_user', $users->id)->first();
+        $profile = Profile::where('users_id', $users->id)->first();
+        $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        return view('user.profilend', compact('users', 'profile', 'thanhtoan', 'uservip'));
     }
 
     public function themprf($id)

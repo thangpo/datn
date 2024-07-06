@@ -8,6 +8,7 @@ use App\Models\Donhang;
 use App\Models\Lichtrinh;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\UserVip;
 use App\Models\Vexem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,20 +17,23 @@ use Illuminate\Support\Facades\Mail;
 
 class VexemController extends Controller
 {
-    public function themmoivx($id){
+    public function themmoivx($id)
+    {
         $lichtrinh = Lichtrinh::find($id);
         $vexem = Vexem::where('lichtrinh_id', $lichtrinh->id)->get();
         $lichtrinhs = Lichtrinh::where('id', $id)->get();
         return view('vexem.vexem', compact('lichtrinh', 'vexem', 'lichtrinhs'));
     }
 
-// thongtindv thongtindv
-    public function themvexem($id){
+    // thongtindv thongtindv
+    public function themvexem($id)
+    {
         $lichtrinh = Lichtrinh::find($id);
         return view('vexem.themvexe', compact('lichtrinh'));
     }
 
-    public function vexemtt(Request $request){
+    public function vexemtt(Request $request)
+    {
         $vexem = new Vexem();
         $vexem->lichtrinh_id = $request->lichtrinh_id;
         $vexem->tenve = $request->tenve;
@@ -40,13 +44,15 @@ class VexemController extends Controller
         return redirect()->back()->with('thongbao', 'them thanh cong');
     }
 
-    public function suavexemtt($id){
+    public function suavexemtt($id)
+    {
         $vexem = Vexem::find($id);
         $lichtrinh = Lichtrinh::where('id', $vexem->lichtrinh_id)->first();
         return view('vexem.suavexem', compact('lichtrinh', 'vexem'));
     }
 
-    public function suave(Request $request, $id){
+    public function suave(Request $request, $id)
+    {
         $vexem = Vexem::find($id);
         $vexem->lichtrinh_id = $request->lichtrinh_id;
         $vexem->tenve = $request->tenve;
@@ -58,7 +64,8 @@ class VexemController extends Controller
     }
 
 
-    public function viewvexem($id){
+    public function viewvexem($id)
+    {
         $users = User::find($id);
         $vexem = DB::table('vexem')->get();
         $lichtrinh = DB::table('lichtrinh')->get();
@@ -66,29 +73,54 @@ class VexemController extends Controller
         return view('vexem.viewvexem', compact('lichtrinh', 'vexem', 'users', 'nhomnhac'));
     }
 
-    public function thongtindv($id1, $id2){
-        $vexem = Vexem::find($id1);
-        $users = User::find($id2);
-        $profile = Profile::where('users_id', $users->id)->first();
-        $lichtrinh = Lichtrinh::where('id', $vexem->lichtrinh_id)->get();
-        $nhomnhac = DB::table('nhomnhac')->get();
-        return view('vexem.thongtinve', compact('lichtrinh', 'vexem', 'users', 'nhomnhac', 'profile'));
+    public function thongtindv($id1, $id2)
+    {
+        
+        $previousUrl = url()->previous();
+        $previousRouteName = app('router')->getRoutes()->match(app('request')->create($previousUrl))->getName();
+
+        if ($previousRouteName == "viewvexem") {
+            $users = User::find($id2);
+            $vexem = Vexem::find($id1);
+            $profile = Profile::where('users_id', $users->id)->first();
+            $lichtrinh = Lichtrinh::where('id', $vexem->lichtrinh_id)->get();
+            $nhomnhac = DB::table('nhomnhac')->get();
+            return view('vexem.thongtinve', compact('lichtrinh', 'vexem', 'users', 'nhomnhac', 'profile'));
+        }
+        if($previousRouteName == "vipuser"){
+            $users = User::find($id2);
+            $uservip = UserVip::where('id', $id1)->first();
+            $profile = Profile::where('users_id', $users->id)->first();
+            return view('vip.thanhtoan', compact('uservip', 'users', 'profile'));
+        }
     }
 
-    public function congdien(){
+    public function congdien()
+    {
         $nhomnhac = DB::table('nhomnhac')->get();
         $lichtrinh = DB::table('lichtrinh')->get();
         return view('vexem.congdien', compact('lichtrinh', 'nhomnhac'));
     }
 
-    public function congdiens($id){
+    public function congdiens($id)
+    {
         $users = User::where('id', $id)->first();
         $nhomnhac = DB::table('nhomnhac')->get();
         $lichtrinh = DB::table('lichtrinh')->get();
         return view('vexem.congdien', compact('lichtrinh', 'nhomnhac', 'users'));
     }
-    
-    public function thongtinbuild(Request $request){
+
+    public function vexemcd($id1, $id2)
+    {
+        $users = User::where('id', $id2)->first();
+        $nhomnhac = DB::table('nhomnhac')->get();
+        $lichtrinh = Lichtrinh::where('id', $id1)->first();
+        $vexem = Vexem::where('lichtrinh_id', $lichtrinh->id)->get();
+        return view('vexem.vexemcongdien', compact('lichtrinh', 'nhomnhac', 'users', 'vexem'));
+    }
+
+    public function thongtinbuild(Request $request)
+    {
         $bangthanhtoan = new Bangthanhtoan();
         $bangthanhtoan->users_id = $request->users_id;
         $bangthanhtoan->vexem_id = $request->vexem_id;
@@ -101,7 +133,7 @@ class VexemController extends Controller
 
 
         // khi có build vé xem
-        $bangthanhtoantg = DB::table('bangthanhtoan')->orderBy('id','desc')->first();
+        $bangthanhtoantg = DB::table('bangthanhtoan')->orderBy('id', 'desc')->first();
         $userstg = DB::table('users')->get();
         $vexemtg = DB::table('vexem')->get();
         $lichtrinhtg = DB::table('lichtrinh')->get();
@@ -110,7 +142,8 @@ class VexemController extends Controller
     }
     //thanh toán bằng tiền mặt
     //thanh toán bằng ck
-    public function thanhtoannao(Request $request){
+    public function thanhtoannao(Request $request)
+    {
         $donhang = new Donhang();
         $donhang->users_id = $request->users_id;
         $donhang->vexem_id = $request->vexem_id;
@@ -135,7 +168,7 @@ class VexemController extends Controller
 
         $tenve = $vexem->tenve;
 
-        $title_mail = 'Vé công diễn'.' '.$tenve;
+        $title_mail = 'Vé công diễn' . ' ' . $tenve;
 
         $users = User::where('id', $request->users_id)->get();
 
@@ -151,14 +184,14 @@ class VexemController extends Controller
             'tennd' => $profile->tennd,
         ];
 
-            foreach ($users as $us){
-                $data['email'][] = $us->email;
-            }
-            
-        
-        Mail::send('vexem.camon', $data, function($message) use ($title_mail, $data){
+        foreach ($users as $us) {
+            $data['email'][] = $us->email;
+        }
+
+
+        Mail::send('vexem.camon', $data, function ($message) use ($title_mail, $data) {
             $message->to($data['email'])->subject($title_mail);
-            $message->from($data['email'],$title_mail);
+            $message->from($data['email'], $title_mail);
         });
 
         $users = User::where('id', $request->users_id)->first();

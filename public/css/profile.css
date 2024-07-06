@@ -330,3 +330,28 @@ button:hover {
     text-decoration: none;
     width: 400px;
 }
+
+.animated-border {
+    width: 400px;
+    border-radius: 50%;
+    border: 9px solid transparent;
+    animation: colorBorder 5s infinite;
+}
+
+@keyframes colorBorder {
+    0% {
+        border-color: red;
+    }
+    25% {
+        border-color: blue;
+    }
+    50% {
+        border-color: green;
+    }
+    75% {
+        border-color: yellow;
+    }
+    100% {
+        border-color: purple;
+    }
+}

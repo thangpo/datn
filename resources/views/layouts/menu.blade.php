@@ -42,6 +42,14 @@
       </li>
 
       <li>
+        <a href="{{ route('viphienthi') }}">
+          <i class='bx bxs-cog'></i>
+          <span class="links_name">Quản lý VIP</span>
+        </a>
+        <span class="tooltip">Quản lý VIP</span>
+      </li>
+
+      <li>
         <a href="{{ route('baivietall') }}">
           <i class='bx bxs-cog'></i>
           <span class="links_name">Quản lý bài viết</span>

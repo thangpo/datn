@@ -42,16 +42,8 @@
   @endif
 
   @if(empty($usernd) != 'Null')
-  @foreach($users as $us)
   <header>
     <section>
-      @if(empty($idols) != 'Null')
-      <a href="{{route('chuyentiep', $us->id)}}" id="logo" style="text-align: center;">
-        <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{asset('uploads/'.$idols->anh)}}" alt="">
-        <p style="font-size: 15px;">Xin chào: {{$idols->tenid}}</p>
-      </a>
-      @endif
-
       @if(empty($profile) != 'Null')
       <a href="{{route('profilend', $us->id)}}" id="logo" style="text-align: center;">
         <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
@@ -86,7 +78,6 @@
       </nav>
   </header>
   </section>
-  @endforeach
   @endif
 
   @foreach ($idol as $nn)
@@ -102,6 +93,7 @@
           @foreach ($tdidol as $td)
           @if($td->id == $nn->id)
           <p>Số người theo dõi: {{$td->theodoi_count}}</p>
+          <a href="/tinnhan/{{$nn->id}}/user/{{$usernd->id}}">Nhắn tin với idol</a>
           @endif
           @endforeach
         </div>
@@ -175,11 +167,11 @@
                 </button>
               </div>
               <div class="view-more">
-                @foreach ($users as $nn)
                 <button class="view-more-button">
-                  Email liên hệ: {{$nn->email}}
+                  @if(empty($users) != 'Null')
+                    Email liên hệ: {{$users->email}}
+                  @endif
                 </button>
-                @endforeach
                 <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                   <path d="m6 9 6 6 6-6"></path>
                 </svg>

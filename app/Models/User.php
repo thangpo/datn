@@ -3,15 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
+use NotificationChannels\WebPush\PushSubscription;
 
 class User extends Authenticatable
 {
-    use SanctumHasApiTokens, HasFactory, Notifiable;
+    use SanctumHasApiTokens, HasFactory, Notifiable, HasPushSubscriptions;
 
     /**
      * The attributes that are mass assignable.
@@ -60,5 +62,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function updatePushSubscription($endpoint, $key, $token)
+    {
+        // Logic để lưu thông tin đăng ký vào bảng push_subscriptions
+        // Ví dụ:
+        $this->pushSubscriptions()->updateOrCreate(
+            ['endpoint' => $endpoint],
+            ['auth' => $key, 'p256dh' => $token]
+        );
+    }
+
+    public function pushSubscriptions()
+    {
+        return $this->hasMany(PushSubscription::class);
+    }
     
 }

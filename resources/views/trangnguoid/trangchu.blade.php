@@ -41,6 +41,7 @@
     </a>
     @endif
 
+    @if(empty($thanhtoan))
     @if(empty($profile) != 'Null')
     <a href="{{route('profilend', $us->id)}}" id="logo" style="text-align: center;">
       <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
@@ -50,7 +51,28 @@
     <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
     @endif
     @endif
+    @endif
 
+    @if(empty($thanhtoan) != 'Null')
+    @if($uservip->ten_vip == "VIP I")
+    <a href="{{route('profilend', $us->id)}}" id="logo" style="text-align: center;">
+      <img style="width: 40px; height: 40px; border-radius: 50%; border: 5px solid gray;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
+      <p style="font-size: 15px;">Xin chào: {{$profile->tennd}}</p>
+    </a>
+    @endif
+    @if($uservip->ten_vip == "VIP II")
+    <a href="{{route('profilend', $us->id)}}" id="logo" style="text-align: center;">
+      <img style="width: 40px; height: 40px; border-radius: 50%; border: 5px solid yellow;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
+      <p style="font-size: 15px;">Xin chào: {{$profile->tennd}}</p>
+    </a>
+    @endif
+    @if($uservip->ten_vip == "VIP III")
+    <a href="{{route('profilend', $us->id)}}" id="logo" style="text-align: center;">
+      <img style="width: 40px; height: 40px; border-radius: 50%; border: 5px solid yellow;" class="animated-border" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
+      <p style="font-size: 15px;">Xin chào: {{$profile->tennd}}</p>
+    </a>
+    @endif
+    @endif
 
 
 
@@ -147,17 +169,35 @@
 </section>
 
 <div class="container2" style="text-align: center; width: 1000px;">
-    <span class="char" style="animation-delay: 0s;"><h1 class="h11">B</h1></span>
-    <span class="char" style="animation-delay: 0.5s;"><h1 class="h11">à</h1></span>
-    <span class="char" style="animation-delay: 1.5s;"><h1 class="h11">i</h1></span>
-    <span class="char" style="animation-delay: 2.5s;"><h1 class="h11">h</h1></span>
-    <span class="char" style="animation-delay: 3.5s;"><h1 class="h11">á</h1></span>
-    <span class="char" style="animation-delay: 4.5s;"><h1 class="h11">t</h1></span>
-    <span class="char" style="animation-delay: 6.5s;"><h1 class="h11">m</h1></span>
-    <span class="char" style="animation-delay: 7.5s;"><h1 class="h11">ớ</h1></span>
-    <span class="char" style="animation-delay: 8.5s;"><h1 class="h11">i</h1></span>
-    <!-- Thêm các chữ tiếp theo với thời gian delay tăng dần -->
-  </div>
+  <span class="char" style="animation-delay: 0s;">
+    <h1 class="h11">B</h1>
+  </span>
+  <span class="char" style="animation-delay: 0.5s;">
+    <h1 class="h11">à</h1>
+  </span>
+  <span class="char" style="animation-delay: 1.5s;">
+    <h1 class="h11">i</h1>
+  </span>
+  <span class="char" style="animation-delay: 2.5s;">
+    <h1 class="h11">h</h1>
+  </span>
+  <span class="char" style="animation-delay: 3.5s;">
+    <h1 class="h11">á</h1>
+  </span>
+  <span class="char" style="animation-delay: 4.5s;">
+    <h1 class="h11">t</h1>
+  </span>
+  <span class="char" style="animation-delay: 6.5s;">
+    <h1 class="h11">m</h1>
+  </span>
+  <span class="char" style="animation-delay: 7.5s;">
+    <h1 class="h11">ớ</h1>
+  </span>
+  <span class="char" style="animation-delay: 8.5s;">
+    <h1 class="h11">i</h1>
+  </span>
+  <!-- Thêm các chữ tiếp theo với thời gian delay tăng dần -->
+</div>
 
 <div class="body3">
   <div class="container3">
@@ -610,9 +650,15 @@
 <div class="body2">
   <div class="iia">
     <div style="display: flex; gap: 10px; margin-top: 20px;">
-      <div class="line line1"><h1 class="h11">CÁC NHÓM</h1></div>
-      <div class="line line2"><h1 class="h11">NHẠC THUỘC</h1></div>
-      <div class="line line3"><h1 class="h11">CÔNG TY</h1></div>
+      <div class="line line1">
+        <h1 class="h11">CÁC NHÓM</h1>
+      </div>
+      <div class="line line2">
+        <h1 class="h11">NHẠC THUỘC</h1>
+      </div>
+      <div class="line line3">
+        <h1 class="h11">CÔNG TY</h1>
+      </div>
     </div>
     <div class="idol" style="margin-top: 20px;">
       @foreach ($nhomnhac as $nl)
