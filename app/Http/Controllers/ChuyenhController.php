@@ -68,8 +68,12 @@ class ChuyenhController extends Controller
         $nhomnhac = DB::table('nhomnhac')->get();
         $idols = Idol::where('id', $usernd->idol_id)->first();
         $thanhtoan = Thanhtoanvip::where('id_user', $usernd->id)->first();
-        $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
         $profile = Profile::where('users_id', $usernd->id)->first();
+        if(empty($thanhtoan) != 'Null'){
+            $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        }else{
+            $uservip = '';
+        }
         return view('trangnguoid.trangchu', compact('baihat', 'banner', 'thanhtoan', 'cauhinh','idol','nhomnhac','users', 'usernd', 'profile', 'idols', 'uservip'));
     }
 

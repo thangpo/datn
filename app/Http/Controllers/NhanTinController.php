@@ -8,6 +8,7 @@ use App\Models\Nhantin;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NhanTinController extends Controller
 {
@@ -21,6 +22,15 @@ class NhanTinController extends Controller
         $nhantin = Nhantin::where('id_idol', $profile->id)->orderBy('created_at', 'desc')->get();
         return view('nhantin.tinnhannd', compact('idol', 'user', 'profile', 'nhantin', 'tenurl'));
     }
+
+    public function fannhant($id){
+        $user = User::where('id', $id)->first();
+        $idol = Idol::where('id', $user->idol_id)->first();
+        $nhantin = Nhantin::where('id_idol', $idol->id)->first();
+        $profile = Profile::where('id', $nhantin->id_profile)->get();
+        return view('nhantin.fannt', compact('idol', 'nhantin', 'profile', 'user'));
+    }
+
     public function guitinn(Request $request){
         $tinhnhan = new Nhantin();
 

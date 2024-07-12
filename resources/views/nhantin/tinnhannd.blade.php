@@ -24,7 +24,7 @@
                 @endforeach
 
                 @foreach($nhantin as $nt)
-                @if($nt->nh != 1)
+                @if($nt->nh != 1 && $profile->id == $nt->id_profile)
                 <div style="float: right; margin-top: 100px; width: 250px;">
                     <div style="display: flex; gap: 20px;">
                         <p style="font-size: 14px;">{{$profile->tennd}}</p>
@@ -47,9 +47,7 @@
                 <div style="display: flex; gap: 5px;">
                     <input type="text" name="id_idol" value="{{$idol->id}}" style="display: none;">
                     <input type="text" name="id_profile" value="{{$profile->id}}" style="display: none;">
-                    @if($tenurl == 'tinnhan')
                     <input type="text" name="nh" value="0" style="display: none;">
-                    @endif
                     <input type="text" name="noidung" placeholder="Viết những lời yêu thương của bạn vào đây" style="width: 90%; height: 30px;">
                     <button style="width: 10%; height: 30px;" type="submit"><img style="width: 10%;" src="https://th.bing.com/th/id/OIF.8WDvc2M10gySjsD6Vz3ZwA?rs=1&pid=ImgDetMain" alt=""></button>
                 </div>

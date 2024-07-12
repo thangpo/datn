@@ -61,6 +61,7 @@ Route::match(['get', 'post'], '/push', [PushController::class, 'push'])->name('p
 
 // Trang nhắn tin 
 Route::match(['get', 'post'], '/tinnhan/{id1}/user/{id2}', [NhanTinController::class, 'tinnhan'])->name('tinnhan');
+Route::match(['get', 'post'], '/fannhant/{id}', [NhanTinController::class, 'fannhant'])->name('fannhant');
 Route::match(['get', 'post'], '/guitinn', [NhanTinController::class, 'guitinn'])->name('guitinn');
 
 //lịch trình admin và người dùng
@@ -160,7 +161,7 @@ Route::match(['get', 'post'], '/congdiens/{id}', [VexemController::class, 'congd
 Route::match(['get', 'post'], '/vexemcd/{id1}/user/{id2}', [VexemController::class, 'vexemcd'])->name('vexemcd');
 Route::match(['get', 'post'], '/emailcamon', [VexemController::class, 'emailcamon'])->name('emailcamon');
 
-// vip của người dùng thongtindv profilend thanhtoanzalo
+// vip của người dùng themprf
 Route::match(['get', 'post'], 'viphienthi', [UserVipController::class, 'viphienthi'])->name('viphienthi');
 Route::match(['get', 'post'], 'themvip', [UserVipController::class, 'themvip'])->name('themvip');
 Route::match(['get', 'post'], 'themvipus', [UserVipController::class, 'themvipus'])->name('themvipus');
@@ -176,7 +177,7 @@ Route::put('thanhtoannangcap/{id}', [ThanhtoanController::class, 'thanhtoannangc
 // thanh toán
 Route::match(['get', 'post'], '/thanhtoannao', [VexemController::class, 'thanhtoannao'])->name('thanhtoannao');
 
-// users route viewvexem
+// users route thanhtoanvp
 Route::match(['get', 'post'], '/hienthius/{id1}/nhomnhac/{id2}', [UserController::class, 'hienthius'])->name('hienthius');
 Route::match(['get', 'post'], '/themus/{id1}/nhomnhac/{id2}', [UserController::class, 'themus'])->name('themus');
 Route::match(['get', 'post'], '/taikhoant', [UserController::class, 'taikhoant'])->name('taikhoant');
@@ -215,7 +216,7 @@ Route::match(['get', 'post'], '/themblvdn/{id}', [UserController::class, 'thembl
 Route::match(['get', 'post'], '/chuyenvdn/{id1}/user/{id2}', [UserController::class, 'chuyenvdn'])->name('chuyenvdn');
 
 // đăng nhập đăng suất
-Route::match(['get', 'post'], '/register', [UserController::class, 'register'])->name('register');
+
 Route::get('/logout', [UserController::class, 'logout'])->name("logout");
 
 // bài đăng của idol
@@ -236,7 +237,8 @@ Route::match(['get', 'post'], '/binhluannhac/{baihat}', [BinhluanController::cla
 });
 
 
-// không cần đăng nhập ctidolus   thongtindv
+// không cần đăng nhập ctidolus   profilend
+Route::match(['get', 'post'], '/register', [UserController::class, 'register'])->name('register');
 Route::match(['get', 'post'], '/baihatview', [ChuyenhController::class, 'baihatview'])->name('baihatview');
 Route::resource('/chuyenh', ChuyenhController::class);
 Route::match(['get', 'post'], '/baidangall', [BaidangController::class, 'baidangall'])->name('baidangall');

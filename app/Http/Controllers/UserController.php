@@ -466,7 +466,12 @@ class UserController extends Controller
         $users = User::where('id', $id)->first();
         $thanhtoan = Thanhtoanvip::where('id_user', $users->id)->first();
         $profile = Profile::where('users_id', $users->id)->first();
-        $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        if(empty($thanhtoan) != 'Null'){
+            $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        }else{
+            $uservip = '';
+        }
+        
         return view('user.profilend', compact('users', 'profile', 'thanhtoan', 'uservip'));
     }
 
@@ -502,9 +507,14 @@ class UserController extends Controller
         }
         $profile->save();
 
-        $users = User::where('id', $profile->users_id)->get();
-        $profile = Profile::where('id', $id)->get();
-        return view('user.profilend', compact('users', 'profile'));
+        $users = User::where('id', $profile->users_id)->first();
+        $thanhtoan = Thanhtoanvip::where('id_user', $users->id)->first();
+        $profile = Profile::where('users_id', $users->id)->first();
+        if(empty($thanhtoan) != 'Null'){
+            $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        }
+        $uservip = '';
+        return view('user.profilend', compact('users', 'profile', 'thanhtoan', 'uservip'));
     }
 
     public function capnhatttnd(Request $request, $id)
@@ -518,9 +528,15 @@ class UserController extends Controller
         $profile->gioitinh = $request->gioitinh;
         $profile->save();
 
-        $users = User::where('id', $profile->users_id)->get();
-        $profile = Profile::where('id', $id)->get();
-        return view('user.profilend', compact('users', 'profile'));
+        $idus = $request->users_id;
+        $users = User::where('id', $idus)->first();
+        $thanhtoan = Thanhtoanvip::where('id_user', $users->id)->first();
+        $profile = Profile::where('users_id', $users->id)->first();
+        if(empty($thanhtoan) != 'Null'){
+            $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        }
+        $uservip = '';
+        return view('user.profilend', compact('users', 'profile', 'thanhtoan', 'uservip'));
     }
 
     public function pfnguoidung(UserRequest $request)
@@ -542,9 +558,13 @@ class UserController extends Controller
 
         $idus = $request->users_id;
         $users = User::where('id', $idus)->first();
-        $profile = Profile::where('users_id', $users->id)->get();
-        $users = User::where('id', $idus)->get();
-        return view('user.profilend', compact('users', 'profile'));
+        $thanhtoan = Thanhtoanvip::where('id_user', $users->id)->first();
+        $profile = Profile::where('users_id', $users->id)->first();
+        if(empty($thanhtoan) != 'Null'){
+            $uservip = UserVip::where('id', $thanhtoan->id_vip)->first();
+        }
+        $uservip = '';
+        return view('user.profilend', compact('users', 'profile', 'thanhtoan', 'uservip'));
     }
 
 

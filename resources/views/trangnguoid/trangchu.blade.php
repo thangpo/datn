@@ -47,10 +47,11 @@
       <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{asset('uploads/'.$profile->anhnd)}}" alt="">
       <p style="font-size: 15px;">Xin chào: {{$profile->tennd}}</p>
     </a>
+    @endif
+    @endif
+
     @if(empty($profile))
     <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
-    @endif
-    @endif
     @endif
 
     @if(empty($thanhtoan) != 'Null')
@@ -85,6 +86,7 @@
     </label>
     <input type="checkbox" id="toggle-1">
 
+    @if(empty($idols))
     <nav class="navidol">
       <ul class="ulidol">
         <li class="liidol"><a class="aidol" href="{{route('hoadon', $us->id)}}">Lịch sử mua sắm</a></li>
@@ -93,15 +95,21 @@
         <li class="liidol"><a class="aidol" href="{{route('baidangnd', $us->id)}}">Bài đăng</a></li>
         <li class="liidol"><a class="aidol" href="{{route('hienthinus', $us->id)}}">Nhạc</a></li>
         <li class="liidol"><a class="aidol" href="{{route('congdiens', $us->id)}}">Công diễn</a></li>
-        @if($us->id > 0)
-        @if($us->idol_id == 'Null')
-        <li class="liidol"><a class="aidol" href="{{route('profilend', $us->id)}}">Profile</a></li>
-        <li class="liidol"><a class="aidol" href="{{route('logout')}}">Đăng suất</a></li>
-        @endif
         <li class="liidol"><a class="aidol" href="{{route('videonganctnd', $us->id)}}">Video ngắn</a></li>
-        @endif
       </ul>
     </nav>
+    @endif
+    @if(empty($idols) != 'Null')
+    <nav class="navidol">
+      <ul class="ulidol">
+        <li class="liidol"><a class="aidol" href="{{route('fannhant', $us->id)}}">Trò chuyện cùng fan</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('viewvexem', $us->id)}}">Lich trình làm việc</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('baidangnd', $us->id)}}">Quản lý bài đăng</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('hienthinus', $us->id)}}">Thông kê lượt người theo dõi mới</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('videonganctnd', $us->id)}}">Quản lý video ngắn</a></li>
+      </ul>
+    </nav>
+    @endif
 </header>
 </section>
 @endforeach

@@ -14,7 +14,7 @@
 
 
         <div style="width: 500px; border: 1px solid;">
-            @if(empty($uservip))
+            @if(empty($thanhtoan))
             <h1>Thanh toán qua zalo momo và chuyển khoản</h1>
             <form action="{{route('thanhtoanzalo')}}" style="margin-left: 5px;" method="POST">
                 @csrf
@@ -38,7 +38,7 @@
             </form>
             @endif
 
-            @if(empty($uservip) != 'Null')
+            @if(empty($thanhtoan) != 'Null')
             <h1>Nâng cấp qua zalo momo và chuyển khoản</h1>
             <form action="{{route('thanhtoannangcap', $thanhtoan->id)}}" style="margin-left: 5px;" method="POST">
                 @csrf
