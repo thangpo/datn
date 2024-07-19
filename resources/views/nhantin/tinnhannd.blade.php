@@ -22,9 +22,9 @@
                 </div>
                 @endif
                 @endforeach
-
+                
                 @foreach($nhantin as $nt)
-                @if($nt->nh != 1 && $profile->id == $nt->id_profile)
+                @if($nt->nh != 1)
                 <div style="float: right; margin-top: 100px; width: 250px;">
                     <div style="display: flex; gap: 20px;">
                         <p style="font-size: 14px;">{{$profile->tennd}}</p>

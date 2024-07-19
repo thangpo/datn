@@ -50,9 +50,7 @@
     @endif
     @endif
 
-    @if(empty($profile))
-    <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
-    @endif
+
 
     @if(empty($thanhtoan) != 'Null')
     @if($uservip->ten_vip == "VIP I")
@@ -87,6 +85,9 @@
     <input type="checkbox" id="toggle-1">
 
     @if(empty($idols))
+    @if(empty($profile))
+    <a href="{{route('themprf', $us->id)}}">Thêm mới thông tin khách hàng</a>
+    @endif
     <nav class="navidol">
       <ul class="ulidol">
         <li class="liidol"><a class="aidol" href="{{route('hoadon', $us->id)}}">Lịch sử mua sắm</a></li>
@@ -102,8 +103,8 @@
     @if(empty($idols) != 'Null')
     <nav class="navidol">
       <ul class="ulidol">
-        <li class="liidol"><a class="aidol" href="{{route('fannhant', $us->id)}}">Trò chuyện cùng fan</a></li>
-        <li class="liidol"><a class="aidol" href="{{route('viewvexem', $us->id)}}">Lich trình làm việc</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('fannhant', $us->id)}}">Trò chuyện</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('viewvexem', $us->id)}}">Lich trình</a></li>
         <li class="liidol"><a class="aidol" href="{{route('baidangnd', $us->id)}}">Quản lý bài đăng</a></li>
         <li class="liidol"><a class="aidol" href="{{route('hienthinus', $us->id)}}">Thông kê lượt người theo dõi mới</a></li>
         <li class="liidol"><a class="aidol" href="{{route('videonganctnd', $us->id)}}">Quản lý video ngắn</a></li>

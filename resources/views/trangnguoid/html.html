@@ -1,150 +1,232 @@
-<style>
-  body {
-  margin: 0;
-  overflow: hidden;
-}
+<!DOCTYPE html>
+<html lang="en">
 
-.centered {
-  position: absolute;
-  margin: auto;
-  top:0; bottom:0; left:0; right:0;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* TikTok @Code The World */
+    /* https://links.codetheworld.io */
 
-.face {
-  width: 150px;
-  height: 150px;
-  background-color: #EBEBEB;
-  border-radius: 50%;
-  -webkit-mask: url(https://i.imgur.com/RlyofWb.png) top left / cover;
-  mask: url(https://i.imgur.com/RlyofWb.png) top left / cover;
-}
+    @font-face {
+      font-family: "H7GBK-Heavy";
+      src: url('https://hw-media-cdn-mingchao.kurogame.com/font/H7GBK-Heavy.ttf');
+    }
 
-.back {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: -webkit-linear-gradient(top, #FF694C 0%, #F15378 40%, #E053D5 50%, #B54BEB 60%, #5B86EE 70%, #00EEEB 100%);
-  background: linear-gradient(top, #FF694C 0%, #F15378 30%, #E053D5 40%, #B54BEB 60%, #5B86EE 70%, #00EEEB 100%);
-  
-  -webkit-filter: saturate(0.5);
-  filter: saturate(0.5);
-  -webkit-transform: scale(1) rotate(-25deg);
-  transform: scale(1) rotate(-25deg);
-  -webkit-animation: spin 0.3s infinite linear alternate;
-  animation: spin 0.3s infinite linear alternate;
-}
+    body {
+      height: 100vh;
+      margin: 0;
+    }
 
-.headphones {
-  width: 320px;
-  height: 120px;
-  -webkit-animation: bounce 0.3s linear infinite alternate;
-  animation: bounce 0.3s linear infinite alternate;
-}
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #f5f5f5;
+      overflow: hidden;
+    }
 
-.earmuff {
-  float: left;
-  width: 20px;
-  height: 120px;
-  background: #FA7B57;
-  border-radius: 50% 10px 10px 50%;
-  border-right: #FA8E57 solid 20px;
-  
-}
-.earmuff:nth-child(2){
-  float: right;
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
+    .item {
+      width: 165px;
+      height: 250px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      border-radius: 20px;
+      background-position: 50% 50%;
+      background-size: cover;
+      background-color: #151212;
+      display: inline-block;
+      transition: 0.5s;
+    }
 
-.band {
-  width: 320px;
-  height: 300px;
-  border-radius: 50%;
-  background-color: trnasparent;
-  border-top: #FA7B57 solid 40px;
-  z-index: -99;
-}
+    .item:nth-child(1),
+    .item:nth-child(2) {
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
 
-.music {
-  width: 450px;
-  height: 50px;
-}
-.group1{
-  float: left;
-}
-.group2{
-  float: right;
-  -webkit-transform: rotate(180deg);
-}
-.wave {
-  display: inline-block;
-  width: 10px;
-  height: 50px;
-  opacity: 0.2;
-  background-color: #FA7B57;
-  -webkit-animation: wave 0.3s 0.2s linear infinite alternate;
-  animation: wave 0.3s 0.2s linear infinite alternate;
-}
-.wave:nth-child(2) {
-  -webkit-animation: wave 0.3s 0.1s linear infinite alternate;
-  animation: wave 0.3s 0.1s linear infinite alternate;
-}
-.wave:nth-child(3) {
-  -webkit-animation: wave 0.3s linear infinite alternate;
-  animation: wave 0.3s linear infinite alternate;
-}
+    .item:nth-child(3) {
+      left: 70%;
+    }
 
-@keyframes spin {
-  to {
-    -webkit-filter: saturate(1);
-    -webkit-transform: scale(1.05) rotate(-25deg);
-  }
-}
+    .item:nth-child(4) {
+      left: calc(70% + 210px);
+    }
 
-@-webkit-keyframes spin {
-  to {
-    -webkit-filter: saturate(1);
-    -webkit-transform: scale(1.05) rotate(-25deg);
-  }
-}
+    .item:nth-child(5) {
+      left: calc(80% + 430px);
+    }
 
-@keyframes bounce {
-  to {
-    -webkit-transform: scale(1.05);
-  }
-}
+    .item:nth-child(n + 6) {
+      left: calc(80% + 650px);
+      opacity: 0;
+    }
 
-@-webkit-keyframes bounce {
-  to {
-    -webkit-transform: scale(1.05);
-  }
-}
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 60px;
+      width: 300px;
+      text-align: left;
+      color: #eee;
+      transform: translate(0, -50%);
+      font-family: "H7GBK-Heavy";
+      display: none;
+    }
 
-@-webkit-keyframes wave {
-  to {
-    opacity: 1;
-    -webkit-transform: scaleY(2);
-  }
-}
-</style>
-<div class="centered back"></div>
-<div class="centered face"></div>
+    .item:nth-child(2) .content {
+      display: block;
+    }
 
-<div class="centered headphones">
-  <div class="centered band"></div>
-  <div class="earmuff"></div>
-  <div class="earmuff"></div>
-</div>
+    .content .name {
+      font-size: 45px;
+      text-transform: uppercase;
+      font-weight: 400;
+      opacity: 0;
+      animation: animate 1s ease-in-out 1 forwards;
+    }
 
-<div class="centered music">
-  <div class="group1">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+    .content .des {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 100;
+      opacity: 0;
+      animation: animate 1s ease-in-out 0.3s 1 forwards;
+    }
+
+    @keyframes animate {
+      from {
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+      }
+    }
+
+    .buttons {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 60px;
+    }
+
+    button {
+      width: 50px;
+      height: 40px;
+      border-radius: 8px;
+      border: none;
+      background-image: url('https://codetheworld.io/wp-content/uploads/2024/05/prev.png');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-inline: 20px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .next {
+      background-image: url('https://codetheworld.io/wp-content/uploads/2024/05/next.png');
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="slide">
+      <div class="item"
+        style="background-image: url(https://wutheringwaves.kurogames.com/website-preface/assets/super_lingyang-699f1f98.png);">
+        <div class="content">
+          <div class="name">Lingyang</div>
+          <div class="des">
+            Lingyang is a sincere, compassionate foreign visitor of the human community.
+          </div>
+        </div>
+      </div>
+
+      <div class="item"
+        style="background-image: url(https://wutheringwaves.kurogames.com/website-preface/assets/super_weilinai-fb41e537.png);">
+        <div class="content">
+          <div class="name">Verina</div>
+          <div class="des">
+            Formerly a member of a Pioneer Association expedition team from the New Federation, Verina is a humble and
+            determined plant breeder.
+          </div>
+        </div>
+      </div>
+
+      <div class="item"
+        style="background-image: url(https://wutheringwaves.kurogames.com/website-preface/assets/super_jianxin-7ae51570.png);">
+        <div class="content">
+          <div class="name">Jianxin</div>
+          <div class="des">
+            Born in the wilderness and raised in a Taoist sect, Jianxin has been imparted the martial arts of
+            Fengyiquan.
+          </div>
+        </div>
+      </div>
+
+      <div class="item"
+        style="background-image: url(https://wutheringwaves.kurogames.com/website-preface/assets/super_anke-968ed264.png);">
+        <div class="content">
+          <div class="name">Encore</div>
+          <div class="des">
+            She always has two Woolies with her, who are Encore's best friends and protectors.
+          </div>
+        </div>
+      </div>
+
+      <div class="item"
+        style="background-image: url( https://wutheringwaves.kurogames.com/website-preface/assets/super_kakaluo-19b02a23.png);">
+        <div class="content">
+          <div class="name">Calcharo</div>
+          <div class="des">
+            Leader of the "Ghost Hounds", an international mercenary group. Ruthless, vengeful, unforgiving. A potential
+            client must be mindful of the price to pay before making him an offer.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="prev"></button>
+      <button class="next"></button>
+    </div>
   </div>
-  <div class="group2">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
-</div>
+  <script>
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
+
+    nextButton.addEventListener(
+      'click',
+      () => {
+        const items = document.querySelectorAll('.item');
+        document.querySelector('.slide').appendChild(items[0]);
+      },
+    );
+
+    prevButton.addEventListener(
+      'click',
+      () => {
+        const items = document.querySelectorAll('.item');
+        document.querySelector('.slide').prepend(items[items.length - 1]);
+      },
+    );
+
+  </script>
+</body>
+
+</html>

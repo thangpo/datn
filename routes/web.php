@@ -7,6 +7,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BinhluanController;
 use App\Http\Controllers\CauhinhController;
 use App\Http\Controllers\ChuyenhController;
+use App\Http\Controllers\DanhmucController;
 use App\Http\Controllers\IdolController;
 use App\Http\Controllers\LichtrinhtController;
 use App\Http\Controllers\LikeController;
@@ -14,12 +15,14 @@ use App\Http\Controllers\NhacController;
 use App\Http\Controllers\NhanTinController;
 use App\Http\Controllers\NhomnhacController;
 use App\Http\Controllers\PushController;
+use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\ThanhtoanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserVipController;
 use App\Http\Controllers\VexemController;
 use App\Models\Baihat;
 use App\Models\Lichtrinh;
+use App\Models\Sanpham;
 use App\Models\UserVip;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +49,22 @@ Route::resource('/nhomnhac', NhomnhacController::class);
 
 Route::resource('/user', UserController::class);
 Route::resource('/nhac', NhacController::class);
+
+
+//danh mục sản phẩm
+Route::match(['get', 'post'], '/danhsachdm', [DanhmucController::class, 'danhsachdm'])->name('danhsachdm');
+Route::match(['get', 'post'], '/themmoidm', [DanhmucController::class, 'themmoidm'])->name('themmoidm');
+Route::match(['get', 'post'], '/themdm', [DanhmucController::class, 'themdm'])->name('themdm');
+Route::match(['get', 'post'], '/capnhatdm/{id}', [DanhmucController::class, 'capnhatdm'])->name('capnhatdm');
+Route::put('/suadm/{id}', [DanhmucController::class, 'suadm'])->name('suadm');
+Route::put('/xoamemdm/{id}', [DanhmucController::class, 'xoamemdm'])->name('xoamemdm');
+Route::match(['get', 'post'], '/thungracdm', [DanhmucController::class, 'thungracdm'])->name('thungracdm');
+Route::match(['get', 'post'], '/xoadm/{id}', [DanhmucController::class, 'xoadm'])->name('xoadm');
+Route::match(['get', 'post'], '/danhsachsp/{id}', [SanphamController::class, 'danhsachsp'])->name('danhsachsp');
+Route::match(['get', 'post'], '/themsp/{id}', [SanphamController::class, 'themsp'])->name('themsp');
+Route::match(['get', 'post'], '/themmoisp', [SanphamController::class, 'themmoisp'])->name('themmoisp');
+Route::match(['get', 'post'], '/suasp/{id}', [SanphamController::class, 'suasp'])->name('suasp');
+
 
 // bài viết có người dùng và admin
 Route::resource('/baiviet', BaivietController::class);

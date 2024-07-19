@@ -21,11 +21,11 @@
     <div class="body" style="float: left;">
       <div style="">
         <div class="col1">
-          <h1>Quản lý nhóm nhạc của TG 48</h1>
+          <h1>Quản lý danh mục sản phẩm ăn theo</h1>
         </div>
 
         <div style="width: 200px; height: 30px; border: 1px solid; text-align: center; margin-top: 30px;">
-          <a style="text-decoration: none;" href="{{ route('nhomnhac.create') }}">Thêm mới nhóm nhạc</a>
+          <a style="text-decoration: none;" href="{{ route('themmoidm') }}">Thêm mới danh mục sản phẩm</a>
         </div>
 
         <div style="width: 200px; height: 30px; border: 1px solid; text-align: center; margin-top: 30px;">
@@ -33,11 +33,7 @@
         </div>
 
         <div style="width: 200px; height: 30px; border: 1px solid; text-align: center; margin-top: 30px;">
-          <a style="text-decoration: none;" href="{{ route('nhomnhacx') }}">Các nhóm nhạc đã xóa</a>
-        </div>
-
-        <div style="width: 200px; height: 30px; border: 1px solid; text-align: center; margin-top: 30px;">
-          <a style="text-decoration: none;" href="{{ route('danhsachdm') }}">Danh mục sản phẩm ăn theo</a>
+          <a style="text-decoration: none;" href="{{ route('thungracdm') }}">Các danh mục sản phẩm đã xóa</a>
         </div>
 
       </div>
@@ -47,32 +43,34 @@
     <div style="height: 100%; margin-top: 20px; float: right;">
       <div style="display: flex; justify-content: center; align-items: center; ">
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
-          @foreach ($nhomnhac as $nn)
-          @if($nn->xoa_mem == 0)
+          @foreach ($danhmuc as $dm)
+          @if($dm->xoa_mem == 0)
           <div style="display: flex; justify-content: center; align-items: center; border: 1px solid;">
 
             <div>
+              <a href="{{ route('danhsachsp', $dm->id) }}">
               <div style="display: flex; justify-content: center; align-items: center;">
-                <img style="width: 200px; height: 200px; margin-top: 10px;" src="{{asset('uploads/'.$nn->logonn)}}" alt="">
+                <img style="width: 200px; height: 200px; margin-top: 10px;" src="{{asset('uploads/'.$dm->hinh_anh)}}" alt="">
               </div>
 
 
               <div style="text-align: center;">
-                <h1>{{$nn->tennn}}</h1>
-                <h2>Số lượng thành viên: {{$nn->idol_count}}</h2>
+                <h1>{{$dm->ten_sanpham}}</h1>
+              <!--  <h2>Số lượng thành viên: </h2> -->
               </div>
 
               <div style="display: flex; justify-content: center; align-items: center;">
-                <form action="{{route('xoamemnn', $nn->id)}}" method="POST" style="display: flex; gap: 20px;">
+                <form action="{{route('xoamemdm', $dm->id)}}" method="POST" style="display: flex; gap: 20px;">
                 <div style="width: 100px; border: 1px solid; text-align: center; background: white; height: 30px;">
-                    <a href="{{route('nhomnhac.edit', $nn->id)}}" style="text-decoration: none;">Sửa</a>
+                    <a href="{{route('capnhatdm', $dm->id)}}" style="text-decoration: none;">Sửa</a>
                   </div>
                   @csrf
                   @method('PUT')
                   <input type="text" value="1" name="xoa_mem" style="display: none;">
-                  <button type="submit" style="width: 100px;">Xóa</button>
+                  <button type="submit" style="width: 100px;">chuyển vào thùng rác</button>
                 </form>
               </div>
+              </a>
             </div>
           </div>
           @endif
