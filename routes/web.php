@@ -60,10 +60,40 @@ Route::put('/suadm/{id}', [DanhmucController::class, 'suadm'])->name('suadm');
 Route::put('/xoamemdm/{id}', [DanhmucController::class, 'xoamemdm'])->name('xoamemdm');
 Route::match(['get', 'post'], '/thungracdm', [DanhmucController::class, 'thungracdm'])->name('thungracdm');
 Route::match(['get', 'post'], '/xoadm/{id}', [DanhmucController::class, 'xoadm'])->name('xoadm');
+
+// sản phẩm
 Route::match(['get', 'post'], '/danhsachsp/{id}', [SanphamController::class, 'danhsachsp'])->name('danhsachsp');
+Route::match(['get', 'post'], '/thungracsp/{id}', [SanphamController::class, 'thungracsp'])->name('thungracsp');
 Route::match(['get', 'post'], '/themsp/{id}', [SanphamController::class, 'themsp'])->name('themsp');
 Route::match(['get', 'post'], '/themmoisp', [SanphamController::class, 'themmoisp'])->name('themmoisp');
 Route::match(['get', 'post'], '/suasp/{id}', [SanphamController::class, 'suasp'])->name('suasp');
+Route::put('/sua/{id}', [SanphamController::class, 'sua'])->name('sua');
+Route::put('/xoamemsp/{id}', [SanphamController::class, 'xoamemsp'])->name('xoamemsp');
+Route::match(['get', 'post'], '/xoavv/{id}', [SanphamController::class, 'xoavv'])->name('xoavv');
+Route::match(['get', 'post'], '/viewanhphu/{id}', [SanphamController::class, 'viewanhphu'])->name('viewanhphu');
+Route::match(['get', 'post'], '/themanhpsp', [SanphamController::class, 'themanhpsp'])->name('themanhpsp');
+Route::match(['get', 'post'], '/listanh/{id}', [SanphamController::class, 'listanh'])->name('listanh');
+Route::match(['get', 'post'], '/suaanhsp/{id}', [SanphamController::class, 'suaanhsp'])->name('suaanhsp');
+Route::put('/sualaiasp/{id}', [SanphamController::class, 'sualaiasp'])->name('sualaiasp');
+
+//hiện thị sản phẩm ra view
+Route::match(['get', 'post'], '/danhmucsanpham/{id}', [SanphamController::class, 'danhmucsanpham'])->name('danhmucsanpham');
+Route::match(['get', 'post'], '/sanphamchitiet/{id1}/user/{id2}', [SanphamController::class, 'sanphamchitiet'])->name('sanphamchitiet');
+Route::match(['get', 'post'], '/daugiasp/{id1}/user/{id2}', [SanphamController::class, 'daugiasp'])->name('daugiasp');
+Route::put('/capnhatdaugia/{id}', [SanphamController::class, 'capnhatdaugia'])->name('capnhatdaugia');
+
+// thời gian
+Route::match(['get', 'post'], '/qualythoigian', [SanphamController::class, 'qualythoigian'])->name('qualythoigian');
+
+//bình luận sản phẩm
+Route::match(['get', 'post'], '/binhluansp', [SanphamController::class, 'binhluansp'])->name('binhluansp');
+
+//thanh toán sản phẩm
+Route::match(['get', 'post'], '/thongtindonhang/{id}', [SanphamController::class, 'thongtindonhang'])->name('thongtindonhang');
+Route::match(['get', 'post'], '/thanhtoansp', [SanphamController::class, 'thanhtoansp'])->name('thanhtoansp');
+Route::match(['get', 'post'], '/nguontien/{id}', [SanphamController::class, 'nguontien'])->name('nguontien');
+Route::match(['get', 'post'], '/naptien', [SanphamController::class, 'naptien'])->name('naptien');
+Route::match(['get', 'post'], '/daugia/{id}', [SanphamController::class, 'daugia'])->name('daugia');
 
 
 // bài viết có người dùng và admin

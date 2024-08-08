@@ -12,24 +12,34 @@ class Bangthanhtoan extends Model
 
     protected $fillable = [
         'users_id',
+        'sanpham_id',
         'vexem_id',
         'lichtrinh_id',
         'profile_id',
         'soluongve',
         'tongtien',
         'pttt',
-  ];
+        'thong_bao'
+    ];
 
-public function users(){
-    return $this->hasMany(User::class);
-}
-public function vexem(){
-    return $this->hasMany(Vexem::class);
-}
-public function lichtrinh(){
-    return $this->hasMany(Lichtrinh::class);
-}
-public function profile(){
-    return $this->hasMany(Profile::class);
-}
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    public function vexem()
+    {
+        return $this->hasMany(Vexem::class);
+    }
+    public function lichtrinh()
+    {
+        return $this->hasMany(Lichtrinh::class);
+    }
+    public function profile()
+    {
+        return $this->hasMany(Profile::class);
+    }
+    public function sanpham()
+    {
+        return $this->hasMany(Sanpham::class);
+    }
 }

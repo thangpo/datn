@@ -58,7 +58,7 @@
                                     <button type="submit" style="width: 100px;">Quay lại</button>
                                 </form>
 
-                                <form action="{{route('xoavinhvien', $dm->id)}}" method="POST">
+                                <form action="{{route('xoadm', $dm->id)}}" method="POST">
                                     @csrf
                                     <input type="text" value="0" name="xoa_mem" style="display: none;">
                                     <button type="submit" style="width: 100px;">Xóa vĩnh viễn</button>

@@ -16,4 +16,8 @@ class Danhmuc extends Model
         'ten_sanpham',
         'hinh_anh'
     ];
+
+    public function san_pham_an_theo(){
+        return $this->hasMany(Sanpham::class);
+    }
 }

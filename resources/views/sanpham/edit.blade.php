@@ -13,32 +13,49 @@
                         <img style="width: 450px; height: 450px;" src="https://document-export.canva.com/P9EbM/DAF3uMP9EbM/3/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWDTJW6UD%2F20240124%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240124T025642Z&X-Amz-Expires=29588&X-Amz-Signature=01a0abb538839fe53501673280bbad26680a047498fd1e8d427ebee22de97dcb&X-Amz-SignedHeaders=host&response-expires=Wed%2C%2024%20Jan%202024%2011%3A09%3A50%20GMT" alt="">
                     </div>
                     <div style="text-align: center; border: 1px solid; height: 20px;">
-                        <a style="text-decoration: none;" href="{{route('danhsachsp', $danhmuc->id)}}" class="btn btn-primary float-end">Danh sách sản phẩm theo danh mục {{$danhmuc->ten_sanpham}}</a>
+                        <a style="text-decoration: none;" href="{{route('danhsachsp', $sanpham->danhmuc_id)}}" class="btn btn-primary float-end">Danh sách sản phẩm theo danh mục @foreach($danhmuc as $dm) @if($sanpham->danhmuc_id == $dm->id){{$dm->ten_sanpham}}@endif @endforeach</a>
                     </div>
                 </div>
             </div>
 
-            <form action="{{route('themmoisp')}}" enctype="multipart/form-data" method="POST" style="border: 1px solid;">
-                <h1 style="text-align: center;">Cập nhất sản phẩm theo danh mục {{$danhmuc->ten_sanpham}}</h1>
+            <form action="{{route('sua', $sanpham->id)}}" enctype="multipart/form-data" method="POST" style="border: 1px solid;">
+                <h1 style="text-align: center;">Cập nhất sản phẩm theo danh mục @foreach($danhmuc as $dm) @if($sanpham->danhmuc_id == $dm->id){{$dm->ten_sanpham}}@endif @endforeach</h1>
                 @csrf
-
+                @method('PUT')
                 <div style="display: flex; gap: 20px;">
 
                     <div>
                         <input type="text" value="0" name="xoa_mem" style="display: none;">
 
                         <div class="form-group" style="display: none;">
-                            <input type="text" name="id_danhmuc" class="form-control" value="{{$danhmuc->id}}">
+                            <input type="text" name="danhmuc_id" class="form-control" value="{{$sanpham->danhmuc_id}}">
+                        </div>
+
+                        <div class="form-group" style="display: none;">
+                            <input type="text" name="xoa_mem" class="form-control" value="0">
                         </div>
 
                         <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
                             <strong>Tên sản phẩm</strong><br>
-                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="text" name="ten_sanpham" class="form-control" placeholder="Nhập tên sản phẩm">
+                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="text" name="ten_sanpham" class="form-control" value="{{$sanpham->ten_sanpham}}">
                         </div>
 
                         <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
                             <strong>Giá bán sản phẩm</strong><br>
-                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="number" name="gia_sanpham">
+                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="number" name="gia_sanpham" value="{{$sanpham->gia_sanpham}}">
+                        </div>
+
+                        <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
+                            <strong>Số lượng sản phẩm</strong><br>
+                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="number" name="so_luong" value="{{$sanpham->so_luong}}">
+                        </div>
+
+                        <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
+                            <strong>Thể loại hàng</strong><br>
+                            <select name="loai_hang" id="">
+                                <option {{$sanpham->loai_hang == 0 ? 'selected' : null}} value="0">Hàng thường</option>
+                                <option {{$sanpham->loai_hang == 1 ? 'selected' : null}} value="1">Hàng đặc biệt</option>
+                            </select>
                         </div>
 
                     </div>
@@ -46,20 +63,20 @@
                     <div>
                         <div class="row">
                             <div class="col-md-6">
-                                <img style="width: 300px; height: 200px;" src="https://phongreviews.com/wp-content/uploads/2022/11/avatar-facebook-mac-dinh-15.jpg" id="img" height="500">
+                                <img style="width: 300px; height: 200px;" src="{{asset('uploads/'.$sanpham->hinh_anh)}}" id="img" height="500">
                             </div>
                             <input type="file" name="hinh_anh" accept="image/*" class="form-control-file" class="@error ('image') is-invalid @enderror" id="input">
                         </div>
 
                         <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
                             <strong>Mô tả sản phẩm</strong><br>
-                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="text" name="mo_ta">
+                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="text" name="mo_ta" value="{{$sanpham->mo_ta}}">
                         </div>
                     </div>
                 </div>
 
 
-                <button type="submit" style="width: 100%; margin-top: 20px; height: 30px;">Thêm sản phẩm</button>
+                <button type="submit" style="width: 100%; margin-top: 20px; height: 30px;">Sửa sản phẩm</button>
             </form>
         </div>
     </div>

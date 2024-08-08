@@ -13,12 +13,14 @@ class Theodoi extends Model
     protected $fillable = [
         'users_id',
         'idol_id',
-  ];
+    ];
 
-public function idol(){
-    return $this->hasMany(Idol::class);
-}
-public function users(){
-    return $this->hasMany(User::class);
-}
+    public function idol()
+    {
+        return $this->hasMany(Idol::class);
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

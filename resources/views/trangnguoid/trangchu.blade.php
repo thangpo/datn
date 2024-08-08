@@ -95,6 +95,7 @@
         <li class="liidol"><a class="aidol" href="{{route('videond', $us->id)}}">MV mới</a></li>
         <li class="liidol"><a class="aidol" href="{{route('baidangnd', $us->id)}}">Bài đăng</a></li>
         <li class="liidol"><a class="aidol" href="{{route('hienthinus', $us->id)}}">Nhạc</a></li>
+        <li class="liidol"><a class="aidol" href="{{route('danhmucsanpham', $us->id)}}">Sản phẩm</a></li>
         <li class="liidol"><a class="aidol" href="{{route('congdiens', $us->id)}}">Công diễn</a></li>
         <li class="liidol"><a class="aidol" href="{{route('videonganctnd', $us->id)}}">Video ngắn</a></li>
       </ul>

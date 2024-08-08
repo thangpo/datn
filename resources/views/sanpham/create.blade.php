@@ -28,7 +28,11 @@
                         <input type="text" value="0" name="xoa_mem" style="display: none;">
 
                         <div class="form-group" style="display: none;">
-                            <input type="text" name="id_danhmuc" class="form-control" value="{{$danhmuc->id}}">
+                            <input type="text" name="danhmuc_id" class="form-control" value="{{$danhmuc->id}}">
+                        </div>
+
+                        <div class="form-group" style="display: none;">
+                            <input type="text" name="xoa_mem" class="form-control" value="0">
                         </div>
 
                         <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
@@ -39,6 +43,19 @@
                         <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
                             <strong>Giá bán sản phẩm</strong><br>
                             <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="number" name="gia_sanpham">
+                        </div>
+
+                        <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
+                            <strong>Số lượng sản phẩm</strong><br>
+                            <input style="width: 200px; height: 30px; border-top: none; border-left: none; border-right: none;" type="number" name="so_luong">
+                        </div>
+
+                        <div class="form-group" style="width: 300px; margin-left: 20px; margin-top: 20px;">
+                            <strong>Thể loại hàng</strong><br>
+                            <select name="loai_hang" id="">
+                                <option value="0">Hàng thường</option>
+                                <option value="1">Hàng đặc biệt</option>
+                            </select>
                         </div>
 
                     </div>

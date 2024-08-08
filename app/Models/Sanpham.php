@@ -22,4 +22,10 @@ class Sanpham extends Model
     public function danhmuc(){
         return $this->hasMany(Danhmuc::class);
     }
+    public function anh_theo_sp(){
+        return $this->hasMany(Anhsp::class);
+    }
+    public function view_sanpham(){
+        return $this->hasMany(ViewSanpham::class);
+    }
 }
