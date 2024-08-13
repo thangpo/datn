@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Abumnhac;
 use App\Models\Albumid;
+use App\Models\BinhluanNhac;
 use App\Models\LikeNhac;
 use App\Models\Nhac;
 use App\Models\Nhomnhac;
@@ -115,6 +116,7 @@ class NhacController extends Controller
             $nhac = Nhac::withCount('likenhac')->get();
         }
         $nhomnhacv = DB::table('nhomnhac')->get();
+
         return view('trangnguoid.nhac', compact('nhac', 'nhomnhac', 'nhomnhacv', 'users', 'profile'));
     }
 
@@ -123,6 +125,8 @@ class NhacController extends Controller
         $nhacs = Nhac::find($id1);
         $users = User::find($id2);
         $profile = Profile::where('users_id', $users->id)->get();
+        $user = DB::table('users')->get();
+        $profiles = DB::table('profile')->get();
         $nhac = DB::table('nhac')->get();
         foreach ($nhac as $n) {
             $nhomnhac = Nhomnhac::where('id', $n->nhomnhac_id)->get();
@@ -132,11 +136,18 @@ class NhacController extends Controller
                 ->select('likenhac.*', 'nhac_id')->get();
             $nhac = Nhac::withCount('likenhac')->get();
         }
+
+        $binhluan = BinhluanNhac::where('nhac_id', $nhacs->id)->get();
+        $nhomnhac = Nhomnhac::where('id', $nhacs->nhomnhac_id)->first();
+        $nhaci = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('nhac');
+        $nhact = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('tenn');
+        $nhaca = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('anh');
+        $nhacid = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('id');
+
         $nhomnhacv = DB::table('nhomnhac')->get();
-        $nhaclx = Nhac::findOrFail($id1);
-        $nhaclx->view_count++;
-        $nhaclx->save();
-        return view('trangnguoid.nhac', compact('nhacs', 'nhac', 'nhomnhac', 'nhomnhacv', 'users', 'profile'));
+
+        return view('trangnguoid.nhac', compact('nhacs', 'nhac', 'nhomnhac', 'nhomnhacv', 'users', 'profile', 
+        'nhaci', 'nhact', 'nhaca', 'binhluan', 'user', 'profiles', 'nhacid'));
     }
 
     // chuyển bài hát nhomnhacnd nhomnhacnd thumucnhac tgalbum  binhluannhac
@@ -444,7 +455,7 @@ class NhacController extends Controller
         $nhaci = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('nhac');
         $nhact = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('tenn');
         $nhaca = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('anh');
-        return view('nhac.nhactheonhom', compact('nhac', 'nhomnhac', 'users','nhaci','nhact', 'nhaca'));
+        return view('nhac.nhactheonhom', compact('nhac', 'nhomnhac', 'users', 'nhaci', 'nhact', 'nhaca'));
     }
 
     //nhactheonhom
@@ -471,10 +482,10 @@ class NhacController extends Controller
         $nhach = Nhac::find($id1);
         $users = User::find($id2);
         $nhomnhac = Nhomnhac::where('id', $nhach->nhomnhac_id)->first();
-            $nhac = Nhac::where('nhomnhac_id', $nhomnhac->id)->get();
-            $nhaci = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('nhac');
-            $nhact = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('tenn');
-            $nhaca = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('anh');
+        $nhac = Nhac::where('nhomnhac_id', $nhomnhac->id)->get();
+        $nhaci = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('nhac');
+        $nhact = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('tenn');
+        $nhaca = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('anh');
         return view('nhac.nhactheonhom', compact('nhach', 'nhomnhac', 'users', 'nhac', 'nhaci', 'nhact', 'nhaca'));
     }
 

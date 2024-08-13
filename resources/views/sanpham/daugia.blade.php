@@ -5,11 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var endDate = new Date("{{ $endDate }}").getTime();
+            var countdownElement = document.getElementById("countdown");
+            var countdownElement2 = document.getElementById("countdown2");
+            var button = document.getElementById("myButton"); // Nút mà bạn muốn kích hoạt sự kiện onclick
+
+            function updateCountdown() {
+                var now = new Date().getTime();
+                var distance = endDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (distance >= 0) {
+                    countdownElement.innerHTML = "Thời gian đếm ngược còn lại: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                } else {
+                    countdownElement.innerHTML = "ĐANG ĐỢI ĐẾN 7 GIỜ SÁNG";
+                    document.getElementById("myDiv").style.display = "block";
+                    countdownElement2.style.display = "none";
+
+                    // Cập nhật endDate thành 7 giờ sáng hôm sau
+                    endDate = new Date();
+                    endDate.setDate(endDate.getDate() + 1);
+                    endDate.setHours(7, 0, 0, 0);
+
+                    // Kích hoạt sự kiện onclick sau khi đếm ngược kết thúc
+                    if (button) {
+                        button.click(); // Giả sử bạn muốn kích hoạt sự kiện onclick của nút có id "myButton"
+                    }
+
+                    // Tiếp tục đếm ngược đến 7 giờ sáng
+                    updateCountdown();
+                }
+            }
+
+            var x = setInterval(updateCountdown, 1000);
+        });
+    </script>
     <link rel="stylesheet" href="{{ asset('css/daugia.css') }}">
 </head>
 
 <body>
-    <div>
+    <div id="countdown"></div>
+    <div id="countdown2">
         <div class="card">
             <header>
                 <div style="display: flex;">
@@ -79,19 +121,20 @@
                 <div style="border: 1px solid; height: 300px;">
                     <div>
                         <p style="text-align: center;">Thông tin sản phẩm</p>
+
                         @if (Session::has('thongbao'))
                         <div style="color: red;">
                             {{Session::get('thongbao')}}
                         </div>
                         @endif
                         <p style="margin-left: 10px;">Số người tham gia: {{$onlineUsersCount}}Người</p>
-                        <p style="margin-left: 10px;">Giá hiện tại: @if(empty($thanhtoan)) {{$sanpham->gia_sanpham}} @else {{$thanhtoans->tongtien}} @endif.000 VND</p>
+                        <p style="margin-left: 10px;">Giá hiện tại: @if(empty($thanhtoans)) {{$sanpham->gia_sanpham}} @else {{$thanhtoans->tongtien}} @endif.000 VND</p>
                     </div>
                     <hr>
                     <div>
                         <p style="text-align: center;">Số tiền hiện có: @if(empty($taisan) != 'Null'){{$taisan->so_tien}}.000 VND @endif</p>
                         @if(empty($taisan) != 'Null')
-                        @if(empty($thanhtoan))
+                        @if(empty($thanhtoans))
                         <form action="{{route('daugia', $taisan->id)}}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <input type="text" name="users_id" value="{{$user->id}}" style="display: none;">
@@ -208,7 +251,42 @@
             </main>
         </div>
     </div>
-    
+    <div id="myDiv" style="display: none;">
+    <h1>Sự kiện đã kết thúc và người đấu giá thành công</h1>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div>
+                @if(empty($nguoitc) != 'Null')
+                @foreach($users as $us)
+                @foreach($profile as $pf)
+                @if($us->id == $nguoitc->user_id && $us->id == $pf->users_id)
+                <div class="card2">
+                    <div class="card-border-top">
+                    </div>
+                    <img src="{{asset('uploads/'.$pf->anhnd)}}" class="img">
+                    </img>
+                    <span> {{$pf->tennd}}</span>
+                    <p class="job"> Giá đã trả: {{$nguoitc->gia_sanpham}}.000 VND</p>
+                </div>
+                @endif
+                @endforeach
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+    @if(empty($thanhtoans))
+    @else
+    <form action="{{route('daugiatc')}}" enctype="multipart/form-data" method="POST" style="display: none;">
+        @csrf
+        <input type="text" name="sanpham_id" value="{{$thanhtoans->sanpham_id}}">
+        <input type="text" name="user_id" value="{{$thanhtoans->users_id}}">
+        <input type="text" name="gia_sanpham" value="{{$thanhtoans->tongtien}}">
+
+        <button id="myButton" onclick="" type="submit">Click me</button>
+    </form>
+    @endif
+
+</body>
 </body>
 
 </html>

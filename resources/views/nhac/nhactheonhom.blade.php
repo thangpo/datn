@@ -15,11 +15,11 @@
     </div>
     <!--Nút quay lại-->
     <a href="{{route('hienthinus', $users->id)}}">
-    <div class="buttons">
-        <button class="btn"><span></span>
-            <p data-start="good luck!" data-text="start!" data-title="Quay lại trang"></p>
-        </button>
-    </div>
+        <div class="buttons">
+            <button class="btn"><span></span>
+                <p data-start="good luck!" data-text="start!" data-title="Quay lại trang"></p>
+            </button>
+        </div>
     </a>
     <!--Album nhạc-->
     <div style="display: flex; gap: 40px;">

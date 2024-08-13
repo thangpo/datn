@@ -13,12 +13,14 @@ class Dangkykenh extends Model
     protected $fillable = [
         'nhomnhac_id',
         'users_id',
-  ];
+    ];
 
-public function nhomnhac(){
-    return $this->hasMany(Nhomnhac::class);
-}
-public function users(){
-    return $this->hasMany(User::class);
-}
+    public function nhomnhac()
+    {
+        return $this->hasMany(Nhomnhac::class);
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

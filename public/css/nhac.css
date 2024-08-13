@@ -1,0 +1,1305 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.App {
+    --vertical-nav-width: 232px;
+    --now-playing-bar-height: 11vh;
+    width: 100vw;
+    height: 100vh;
+    background-color: darkgray;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-areas: "nav-bar main-view" "now-playing-bar now-playing-bar";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    scrollbar-width: none;
+    font-size: 16px;
+}
+
+.App::-webkit-scrollbar {
+    display: none;
+}
+
+.App .test {
+    border: 1px solid magenta;
+}
+
+.App__top-bar {
+    grid-area: main-view;
+    height: 60px;
+    z-index: 2;
+}
+
+.App__nav-bar {
+    grid-area: nav-bar;
+    width: var(--vertical-nav-width);
+    height: 100%;
+    min-height: 100%;
+    background-color: #000;
+    padding-top: 24px;
+    padding-bottom: var(--now-playing-bar-height);
+}
+
+.App__logo {
+    display: grid;
+    place-items: center;
+}
+
+.App__categories-nav {
+    color: #c4c4c4;
+    padding: 18px 12px;
+}
+
+.App__category-item--selected {
+    color: #fff;
+    background-color: rgba(50, 50, 50, 0.6);
+    border-radius: 5px;
+}
+
+.App__category-item {
+    padding: 5px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.App__category-item .icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    margin-right: 10px;
+}
+
+.App__category-item .icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.App__playlists-nav {
+    color: #c4c4c4;
+    padding: 18px 12px;
+}
+
+.App__now-playing-bar {
+    grid-area: now-playing-bar;
+    background-color: #181818;
+    border-top: 1px solid #202020;
+    height: var(--now-playing-bar-height);
+    z-index: 4;
+}
+
+.App__main-view {
+    grid-area: main-view;
+    background-color: #121212;
+    position: relative;
+    z-index: 1;
+    max-height: calc(100vh - var(--now-playing-bar-height));
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.App__main-view::-webkit-scrollbar {
+    display: none;
+}
+
+.App__header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px 32px;
+}
+
+.App__song-navigation {
+    display: flex;
+    flex-direction: row;
+}
+
+.App__song-navigation-prev,
+.App__song-navigation-next {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    margin-right: 16px;
+    cursor: not-allowed;
+}
+
+.App__song-navigation-prev svg,
+.App__song-navigation-next svg {
+    color: #fff;
+}
+
+.App__user {
+    border: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    border-radius: 16px;
+    padding: 1px;
+    background-color: #000;
+}
+
+.App__figure {
+    width: 25px;
+    height: 25px;
+    background-color: #2a2a2a;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-left: 2px;
+    display: grid;
+    place-items: center;
+}
+
+.App__username {
+    color: #fff;
+    font-size: 0.9em;
+    margin-right: 8px;
+}
+
+.App__expand-arrow {
+    transform: rotateZ(180deg);
+    margin-right: 8px;
+}
+
+.App__top-gradient {
+    height: 332px;
+    width: 100%;
+    margin-top: -60px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0%, #121212 100%);
+    background-color: #5028f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.App__header-placeholder {
+    height: 60px;
+    width: 100%;
+}
+
+.App__section {
+    padding: 16px 32px;
+    color: #fff;
+}
+
+.App__quick-links-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.App__quick-link {
+    background-color: #30294b;
+    height: 80px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.App__quick-link-featured-img {
+    height: 80px;
+    width: 80px;
+    border-radius: 4px 0 0 4px;
+    background-color: #efefef;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-right: 16px;
+    background-image: linear-gradient(to bottom right, blue, white);
+}
+
+.App__quick-link-featured-img:nth-of-type(1) {
+    font-size: 2em;
+    display: grid;
+    place-items: center;
+}
+
+.App__section-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.App__section-header span {
+    color: #686868;
+    font-size: 0.8em;
+}
+
+.App__section-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    column-gap: 24px;
+    margin-top: 16px;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 0;
+    overflow-y: hidden;
+}
+
+.App__section-grid-item {
+    background-color: #242424;
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    padding: 10%;
+    border-radius: 4px;
+}
+
+.App__section-grid-item .featured-image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom right, blue, white);
+    background-size: cover;
+    margin-bottom: 16px;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.App__section-grid-item:nth-of-type(1) .featured-image {
+    background-image: url("https://i.scdn.co/image/239649cd6dfd2296632d269b115d1e147695a0a8");
+}
+
+.App__section-grid-item:nth-of-type(2) .featured-image {
+    background-image: url("https://i.scdn.co/image/1ec33564b0c0c1db64babdcf678a5246a4605c6f");
+}
+
+.App__section-grid-item:nth-of-type(3) .featured-image {
+    background-image: url("https://i.scdn.co/image/50a4653e91a472a85b6759225ffd5a2f71d8a9ba");
+}
+
+.App__section-grid-item:nth-of-type(4) .featured-image {
+    background-image: url("https://i.scdn.co/image/8feb7ba9f991af98307ae1de9c491c43754765dc");
+}
+
+.App__section-grid-item:nth-of-type(5) .featured-image {
+    background-image: url("https://i.scdn.co/image/15488d6d07e4d31d388be232f921569bd32d1ac3");
+}
+
+.App__section-grid-item h3 {
+    margin-bottom: 8px;
+}
+
+.App__section-grid-item span {
+    color: #686868;
+    font-size: 0.8em;
+}
+
+.function {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    background-color: rgb(27, 27, 27);
+}
+
+.function .music {
+    width: 20vw;
+    height: 11vh;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5vh;
+    background-color: transparent;
+}
+
+.function .music img {
+    width: 10vh;
+    height: 10vh;
+    border: 0px solid;
+    border-radius: 2vh;
+}
+
+.function .music .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin-left: 2vh;
+    padding-bottom: 1vh;
+    background-color: transparent;
+}
+
+.function .music .details .name {
+    font-size: 3vh;
+    justify-content: left;
+    display: flex;
+    background-color: transparent;
+    font-weight: bold;
+    padding-left: 0px;
+}
+
+.function .music .details .artist {
+    font-size: 2vh;
+    background-color: transparent;
+}
+
+.function .music .love {
+    background-color: transparent;
+}
+
+.function .music .love img {
+    background-color: transparent;
+    padding: 0px;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    width: 4vh;
+    height: 4vh;
+}
+
+.function .playback {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vh;
+    width: 60vw;
+    height: 4vh;
+    background-color: transparent;
+}
+
+.function .playback .upper {
+    width: 50vw;
+    background-color: transparent;
+    height: 6vh;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.function .playback .upper img {
+    width: 3vh;
+    height: 3vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
+    background-color: transparent;
+    filter: invert();
+}
+
+.function .playback .upper img.pause {
+    width: 4vh;
+    height: 4vh;
+}
+
+.function .playback .lower {
+    width: 50vw;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5vh;
+    color: white;
+}
+
+.function .playback .lower .line {
+    width: 50vh;
+    height: 1vh;
+    background-color: white;
+    border: 0px 0px 0px 0px solid;
+    border-radius: 1vh;
+}
+
+.function .playback .lower .text {
+    background-color: transparent;
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+.function .control {
+    width: 20vw;
+    height: 11vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.function .control .images {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    align-items: center;
+}
+
+.function .control .images img {
+    width: 3vh;
+    height: 3vh;
+    background-color: transparent;
+    filter: invert();
+    margin-left: 1vh;
+    margin-right: 1vh;
+}
+
+.function .control .images .line {
+    width: 13vh;
+    height: 1vh;
+    background-color: white;
+    border: 0px 0px 0px 0px solid;
+    border-radius: 1vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+
+audio {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px;
+    background: #181818;
+}
+
+audio::-webkit-media-controls-panel {
+    padding: 10px;
+}
+
+audio::-webkit-media-controls-play-button {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+}
+
+audio::-webkit-media-controls-volume-slider {
+    width: 100px;
+    height: 5px;
+}
+
+audio::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
+    width: 10px;
+    height: 10px;
+}
+
+/**/
+.music-player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.album-art img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+
+.song-details {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.song-title {
+    font-size: 16px;
+    color: #bbb;
+    margin: 0;
+}
+
+.artist-name {
+    font-size: 14px;
+    color: #bbb;
+    margin: 5px 0 0;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 2;
+    gap: 10px;
+    color: #fff;
+    margin: 0 20px;
+}
+
+.progress-bar input[type="range"] {
+    width: 100%;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.current-time,
+.duration {
+    font-size: 14px;
+    color: #bbb;
+}
+
+.extra-controls {
+    display: flex;
+    align-items: center;
+}
+
+.extra-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.volume-slider {
+    width: 100px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+/*progress-bar*/
+/* From Uiverse.io by JkHuger */
+.wave-menu {
+    border: 4px solid #545FE5;
+    border-radius: 50px;
+    width: 500px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: ease 0.2s;
+    position: relative;
+    background: #fff;
+}
+
+.wave-menu li {
+    list-style: none;
+    height: 30px;
+    width: 10px;
+    border-radius: 10px;
+    background: #545FE5;
+    margin: 0 6px;
+    padding: 0;
+    animation-name: wave1;
+    animation-duration: 0.3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition: ease 0.2s;
+}
+
+.wave-menu:hover>li {
+    background: #fff;
+}
+
+.wave-menu:hover {
+    background: #545FE5;
+}
+
+.wave-menu li:nth-child(2) {
+    animation-name: wave2;
+    animation-delay: 0.2s;
+}
+
+.wave-menu li:nth-child(3) {
+    animation-name: wave3;
+    animation-delay: 0.23s;
+    animation-duration: 0.4s;
+}
+
+.wave-menu li:nth-child(4) {
+    animation-name: wave4;
+    animation-delay: 0.1s;
+    animation-duration: 0.3s;
+}
+
+.wave-menu li:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.wave-menu li:nth-child(6) {
+    animation-name: wave2;
+    animation-duration: 0.5s;
+}
+
+.wave-menu li:nth-child(8) {
+    animation-name: wave4;
+    animation-delay: 0.4s;
+    animation-duration: 0.25s;
+}
+
+.wave-menu li:nth-child(9) {
+    animation-name: wave3;
+    animation-delay: 0.15s;
+}
+
+@keyframes wave1 {
+    from {
+        transform: scaleY(1);
+    }
+
+    to {
+        transform: scaleY(0.5);
+    }
+}
+
+@keyframes wave2 {
+    from {
+        transform: scaleY(0.3);
+    }
+
+    to {
+        transform: scaleY(0.6);
+    }
+}
+
+@keyframes wave3 {
+    from {
+        transform: scaleY(0.6);
+    }
+
+    to {
+        transform: scaleY(0.8);
+    }
+}
+
+@keyframes wave4 {
+    from {
+        transform: scaleY(0.2);
+    }
+
+    to {
+        transform: scaleY(0.5);
+    }
+}
+
+
+
+/**/
+/* From Uiverse.io by catraco */
+/*------ Settings ------*/
+.container {
+    --color: #a5a5b0;
+    --size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: var(--size);
+    user-select: none;
+    fill: var(--color);
+}
+
+.container .play {
+    position: absolute;
+    animation: keyframes-fill .5s;
+}
+
+.container .pause {
+    position: absolute;
+    display: none;
+    animation: keyframes-fill .5s;
+}
+
+svg {
+    color: white;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+svg:hover {
+    color: #1db954;
+}
+
+/* ------ On check event ------ */
+.container input:checked~.play {
+    display: none;
+}
+
+.container input:checked~.pause {
+    display: block;
+}
+
+/* ------ Hide the default checkbox ------ */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* ------ controls ------ */
+@keyframes keyframes-fill {
+    0% {
+        transform: rotate(-180deg) scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: rotate(-10deg) scale(1.2);
+    }
+}
+
+
+/**/
+/* From Uiverse.io by catraco */ 
+/*------ Settings ------*/
+.container2 {
+    --color: #a5a5b0;
+    --size: 30px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: var(--size);
+    fill: var(--color);
+  }
+  
+  .container2 .lock-open {
+    position: absolute;
+    animation: keyframes-fill .5s;
+  }
+  
+  .container2 .lock {
+    position: absolute;
+    display: none;
+    animation: keyframes-fill .5s;
+  }
+  
+  /* ------ On check event ------ */
+  .container2 input:checked ~ .lock-open {
+    display: none;
+  }
+  
+  .container2 input:checked ~ .lock {
+    display: block;
+  }
+  
+  /* ------ Hide the default checkbox ------ */
+  .container2 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* ------ Animation ------ */
+  @keyframes keyframes-fill {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  
+    50% {
+      transform: scale(1.2);
+    }
+  }
+  
+  /* From Uiverse.io by catraco */ 
+.heart-container {
+    --heart-color: rgb(91, 173, 255);
+    position: relative;
+    width: 35px;
+    height: 35px;
+    transition: .3s;
+  }
+  
+  .heart-container .checkbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 20;
+    cursor: pointer;
+  }
+  
+  .heart-container .svg-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .heart-container .svg-outline,
+          .heart-container .svg-filled {
+    fill: var(--heart-color);
+    position: absolute;
+  }
+  
+  .heart-container .svg-filled {
+    animation: keyframes-svg-filled 1s;
+    display: none;
+  }
+  
+  .heart-container .svg-celebrate {
+    position: absolute;
+    animation: keyframes-svg-celebrate .5s;
+    animation-fill-mode: forwards;
+    display: none;
+    stroke: var(--heart-color);
+    fill: var(--heart-color);
+    stroke-width: 2px;
+  }
+  
+  .heart-container .checkbox:checked~.svg-container .svg-filled {
+    display: block
+  }
+  
+  .heart-container .checkbox:checked~.svg-container .svg-celebrate {
+    display: block
+  }
+  
+  @keyframes keyframes-svg-filled {
+    0% {
+      transform: scale(0);
+    }
+  
+    25% {
+      transform: scale(1.2);
+    }
+  
+    50% {
+      transform: scale(1);
+      filter: brightness(1.5);
+    }
+  }
+  
+  @keyframes keyframes-svg-celebrate {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      opacity: 1;
+      filter: brightness(1.5);
+    }
+  
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+      display: none;
+    }
+  }
+
+  
+  /* From Uiverse.io by NAKAMOZ */ 
+/* Hide the default checkbox */
+.container3 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container3 {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+  }
+  
+  .checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+  }
+  
+  .checkmark span {
+    width: 32px;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+  }
+  
+  .checkmark span:nth-child(1) {
+    top: 10%;
+  }
+  
+  .checkmark span:nth-child(2) {
+    top: 50%;
+  }
+  
+  .checkmark span:nth-child(3) {
+    top: 90%;
+  }
+  
+  .container3 input:checked + .checkmark span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    -webkit-transform: translateY(-50%) rotate(45deg);
+    -moz-transform: translateY(-50%) rotate(45deg);
+    -ms-transform: translateY(-50%) rotate(45deg);
+    -o-transform: translateY(-50%) rotate(45deg);
+  }
+  
+  .container3 input:checked + .checkmark span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    -webkit-transform: translateY(-50%) rotate(-45deg);
+    -moz-transform: translateY(-50%) rotate(-45deg);
+    -ms-transform: translateY(-50%) rotate(-45deg);
+    -o-transform: translateY(-50%) rotate(-45deg);
+  }
+  
+  .container3 input:checked + .checkmark span:nth-child(3) {
+    transform: translateX(-50px);
+    -webkit-transform: translateX(-50px);
+    -moz-transform: translateX(-50px);
+    -ms-transform: translateX(-50px);
+    -o-transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  /* From Uiverse.io by OnCloud125252 */ 
+/* Note that you only needs to edit the config to customize the button! */
+
+.plusButton {
+    /* Config start */
+    --plus_sideLength: 2.5rem;
+    --plus_topRightTriangleSideLength: 0.9rem;
+    /* Config end */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    width: var(--plus_sideLength);
+    height: var(--plus_sideLength);
+    background-color: #000000;
+    overflow: hidden;
+  }
+  
+  .plusButton::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+  }
+  
+  .plusButton:hover {
+    cursor: pointer;
+  }
+  
+  .plusButton:hover::before {
+    --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+  }
+  
+  .plusButton:focus-visible::before {
+    --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+  }
+  
+  .plusButton>.plusIcon {
+    fill: white;
+    width: calc(var(--plus_sideLength) * 0.7);
+    height: calc(var(--plus_sideLength) * 0.7);
+    z-index: 1;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+  }
+  
+  .plusButton:hover>.plusIcon {
+    fill: black;
+    transform: rotate(180deg);
+  }
+  
+  .plusButton:focus-visible>.plusIcon {
+    fill: black;
+    transform: rotate(180deg);
+  }
+
+
+
+
+
+
+
+
+  /* From Uiverse.io by zanina-yassine */ 
+.card {
+    width: 100% ;
+    height: 500px;
+    background-color: white;
+    box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 17px 17px 27px 27px;
+  }
+  
+  .title {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid #f1f1f1;
+    font-weight: 700;
+    font-size: 13px;
+    color: #47484b;
+  }
+  
+  .title::after {
+    content: '';
+    width: 8ch;
+    height: 1px;
+    position: absolute;
+    bottom: -1px;
+    background-color: #47484b;
+  }
+  
+  .comments {
+    display: grid;
+    grid-template-columns: 35px 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .comment-react {
+    width: 35px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: auto;
+    margin: 0;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  .comment-react button {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
+  
+  .comment-react button:after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: -2.5px;
+    top: -2.5px;
+    background-color: #f5356e;
+    border-radius: 50%;
+    z-index: 0;
+    transform: scale(0);
+  }
+  
+  .comment-react button svg {
+    position: relative;
+    z-index: 9;
+  }
+  
+  .comment-react button:hover:after {
+    animation: ripple 0.6s ease-in-out forwards;
+  }
+  
+  .comment-react button:hover svg {
+    fill: #f5356e;
+  }
+  
+  .comment-react button:hover svg path {
+    stroke: #f5356e;
+    fill: #f5356e;
+  }
+  
+  .comment-react hr {
+    width: 80%;
+    height: 1px;
+    background-color: #dfe1e6;
+    margin: auto;
+    border: 0;
+  }
+  
+  .comment-react span {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 13px;
+    font-weight: 600;
+    color: #707277;
+  }
+  
+  .comment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .comment-container .user {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 10px;
+  }
+  
+  .comment-container .user .user-pic {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+  }
+  
+  .comment-container .user .user-pic:after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 50%;
+    background-color: #0fc45a;
+    border: 2px solid #ffffff;
+  }
+  
+  .comment-container .user .user-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3px;
+  }
+  
+  .comment-container .user .user-info span {
+    font-weight: 700;
+    font-size: 12px;
+    color: #47484b;
+  }
+  
+  .comment-container .user .user-info p {
+    font-weight: 600;
+    font-size: 10px;
+    color: #acaeb4;
+  }
+  
+  .comment-container .comment-content {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: #5f6064;
+  }
+  
+  .text-box {
+    width: 100%;
+    height: fit-content;
+    background-color: #f1f1f1;
+    padding: 8px;
+  }
+  
+  .text-box .box-container {
+    background-color: #ffffff;
+    border-radius: 8px 8px 21px 21px;
+    padding: 8px;
+  }
+  
+  .text-box textarea {
+    width: 100%;
+    height: 40px;
+    resize: none;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 12px 10px 12px;
+    font-size: 13px;
+    outline: none;
+    caret-color: #0a84ff;
+  }
+  
+  .text-box .formatting {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto 1fr;
+  }
+  
+  .text-box .formatting button {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+  }
+  
+  .text-box .formatting button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .text-box .formatting .send {
+    width: 30px;
+    height: 30px;
+    background-color: #0a84ff;
+    margin: 0 0 0 auto;
+  }
+  
+  .text-box .formatting .send:hover {
+    background-color: #026eda;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.6;
+    }
+  
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }

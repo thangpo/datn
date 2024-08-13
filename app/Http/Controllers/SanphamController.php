@@ -288,10 +288,59 @@ class SanphamController extends Controller
         $taisan = ViewSanpham::where('user_id', $user->id)->first();
         $thanhtoan = Bangthanhtoan::where('sanpham_id', $sanpham->id)->orderBy('tongtien', 'desc')->get();
         $thanhtoans = Bangthanhtoan::where('sanpham_id', $sanpham->id)->orderBy('tongtien', 'desc')->first();
+        $nguoitc = ThoiGian::where('sanpham_id', $sanpham->id)
+            ->orderBy('created_at', 'desc')  // Sắp xếp theo created_at giảm dần
+            ->first(); 
+
+        //đồng hồ đếm ngược
+        $countdown = Countdown::first();
+
+        if (!$countdown) {
+            // Nếu chưa có thời gian kết thúc, tạo mới
+            $endDate = now()->addDays(1);
+            Countdown::create(['end_date' => $endDate]);
+        } else {
+            // Lấy thời gian kết thúc từ cơ sở dữ liệu
+            $endDate = Carbon::parse($countdown->end_date);
+
+            // Nếu thời gian đã hết, thiết lập đếm ngược đến 7 giờ sáng hôm sau
+            if (now()->greaterThanOrEqualTo($endDate)) {
+                $endDate = now()->addDay()->setTime(7, 0, 0);
+                $countdown->update(['end_date' => $endDate]);
+            }
+        }
 
         $onlineUsers = $this->getOnlineUsers();
         $onlineUsersCount = count($onlineUsers);
-        return view('sanpham.daugia', compact('user', 'danhmuc', 'sanpham', 'anhsp', 'sanphams', 'binhluansp', 'users', 'profile', 'onlineUsersCount', 'taisan', 'thanhtoan', 'thanhtoans'));
+        return view('sanpham.daugia', compact('user', 'danhmuc', 'sanpham', 'anhsp', 'sanphams', 'binhluansp', 'users', 
+        'profile', 'onlineUsersCount', 'taisan', 'thanhtoan', 'thanhtoans', 'endDate', 'nguoitc'));
+    }
+
+    public function daugiatc(Request $request)
+    {
+
+        $thanhtoan = Bangthanhtoan::where('sanpham_id', $request->sanpham_id)->get();
+        $tongtien = ViewSanpham::where('user_id', $request->user_id)->first();
+        $sotienconlai = $tongtien->so_tien - $request->gia_sanpham;
+
+        $daugia = new ThoiGian();
+        $daugia->sanpham_id = $request->sanpham_id;
+        $daugia->user_id = $request->user_id;
+        $daugia->gia_sanpham = $request->gia_sanpham;
+        $daugia->save();
+
+        // Thu thập tất cả các ID cần xóa
+        $thanhtoanIds = $thanhtoan->pluck('id')->toArray();
+
+        // Xóa các bản ghi trong bảng Bangthanhtoan
+        Bangthanhtoan::destroy($thanhtoanIds);
+
+        $taisan = ViewSanpham::find($tongtien->id);
+        $taisan->user_id = $request->user_id;
+        $taisan->so_tien = $sotienconlai;
+        $taisan->save();
+
+        return redirect()->back();
     }
 
     public function nguontien($id)

@@ -6,820 +6,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
         .body1 {
-            height: 100vh;
             margin: 0;
+            padding: 0;
             display: grid;
-            place-items: center;
-            overflow: hidden;
-            background: #f4f4f6;
-        }
-
-        .card1 {
-            width: 975px;
-            color: #1e1e20;
-            background-color: white;
-            font-family: 'Inter', sans-serif;
-            border-radius: 14px;
-            display: flex;
-            cursor: pointer;
-        }
-
-        .content1 {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 28px;
-        }
-
-        small {
-            font-weight: 600;
-            color: #6e6e72;
-        }
-
-        .hz1 {
-            text-wrap: balance;
-        }
-
-        /**/
-        .body2 {
-            height: 80vh;
-            margin: 0;
-            display: grid;
-            place-items: center;
-            background: #f4f4f6;
-        }
-
-        .wrapper {
-            width: 485px;
-        }
-
-        #preview {
-            width: 100%;
-            box-sizing: border-box;
-            border: 15px solid #d8dee6;
-            margin-bottom: 10px;
-        }
-
-        .thumbnails {
-            width: 100%;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .thumbnail {
-            width: 100px;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-
-        .thumbnail.active {
-            border: 5px solid #d8dee6;
-        }
-
-        .thumbnail:hover {
-            transform: scale(1.1);
-        }
-
-        /**/
-        .messageBox {
-            width: fit-content;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #2d2d2d;
-            padding: 0 15px;
-            border-radius: 10px;
-            border: 1px solid rgb(63, 63, 63);
-        }
-
-        .messageBox:focus-within {
-            border: 1px solid rgb(110, 110, 110);
-        }
-
-        .fileUploadWrapper {
-            width: fit-content;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        #file {
-            display: none;
-        }
-
-        .fileUploadWrapper label {
-            cursor: pointer;
-            width: fit-content;
-            height: fit-content;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .fileUploadWrapper label svg {
-            height: 18px;
-        }
-
-        .fileUploadWrapper label svg path {
-            transition: all 0.3s;
-        }
-
-        .fileUploadWrapper label svg circle {
-            transition: all 0.3s;
-        }
-
-        .fileUploadWrapper label:hover svg path {
-            stroke: #fff;
-        }
-
-        .fileUploadWrapper label:hover svg circle {
-            stroke: #fff;
-            fill: #3c3c3c;
-        }
-
-        .fileUploadWrapper label:hover .tooltip {
-            display: block;
-            opacity: 1;
-        }
-
-        .tooltip {
-            position: absolute;
-            top: -40px;
-            display: none;
-            opacity: 0;
-            color: white;
-            font-size: 10px;
-            text-wrap: nowrap;
-            background-color: #000;
-            padding: 6px 10px;
-            border: 1px solid #3c3c3c;
-            border-radius: 5px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
-            transition: all 0.3s;
-        }
-
-        #messageInput {
-            width: 200px;
-            height: 100%;
-            background-color: transparent;
-            outline: none;
-            border: none;
-            padding-left: 10px;
-            color: white;
-        }
-
-        #messageInput:focus~#sendButton svg path,
-        #messageInput:valid~#sendButton svg path {
-            fill: #3c3c3c;
-            stroke: white;
-        }
-
-        #sendButton {
-            width: fit-content;
-            height: 100%;
-            background-color: transparent;
-            outline: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        #sendButton svg {
-            height: 18px;
-            transition: all 0.3s;
-        }
-
-        #sendButton svg path {
-            transition: all 0.3s;
-        }
-
-        #sendButton:hover svg path {
-            fill: #3c3c3c;
-            stroke: white;
-        }
-
-        /**/
-        .rating:not(:checked)>input {
-            position: absolute;
-            appearance: none;
-        }
-
-        .rating:not(:checked)>label {
-            float: right;
-            cursor: pointer;
-            font-size: 30px;
-            color: #666;
-        }
-
-        .rating:not(:checked)>label:before {
-            content: "★";
-        }
-
-        .rating>input:checked+label:hover,
-        .rating>input:checked+label:hover~label,
-        .rating>input:checked~label:hover,
-        .rating>input:checked~label:hover~label,
-        .rating>label:hover~input:checked~label {
-            color: #e58e09;
-        }
-
-        .rating:not(:checked)>label:hover,
-        .rating:not(:checked)>label:hover~label {
-            color: #ff9e0b;
-        }
-
-        .rating>input:checked~label {
-            color: #ffa723;
-        }
-
-        /**/
-
-        .body3 {
-            display: grid;
-            place-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #fefefe;
+            place-content: center;
+            min-height: 100vh;
+            background: #ffffff;
         }
 
         .container {
-            color: #333;
-            font: 14px/1.5 "Fira Sans";
-            margin: 0 auto;
-            padding: 2rem;
-            width: 975px;
-        }
-
-        .row {
             display: flex;
-        }
-
-        .col {
-            color: #fff;
-            flex: 1 1 auto;
-            min-height: 260px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .col:nth-child(2) {
-            min-width: 20%;
-        }
-
-        .col:nth-child(4) {
-            min-width: 33%;
-        }
-
-        .photo {
-            background: #0f0523 50% 50%/cover;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transition: 1s;
-            transform-origin: bottom right;
-        }
-
-        .photo::before {
-            background: linear-gradient(transparent, #43113380, #000320);
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-
-        h2 {
-            font-weight: 300;
-            font-size: 1.33333rem;
-            line-height: 1.25;
-            margin: 0;
-            position: absolute;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 0;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transition: all 0.275s ease-in-out, visibility 0s 0.275s;
-            visibility: hidden;
-            will-change: transform;
-            transform: translateY(100%);
-        }
-
-        .slide {
-            background: #190115cc;
-            padding: 0 1.5rem;
-        }
-
-        .row:hover~.row .slide {
-            transform: translateY(-100%);
-        }
-
-        .row:hover .slide {
-            transform: translateX(100%);
-        }
-
-        .row:hover .col:hover~.col .slide {
-            transform: translateX(-100%);
-        }
-
-        .row:hover .col:hover .slide {
-            transform: none;
-            visibility: visible;
-            transition-delay: 0s;
-        }
-
-        .col:hover .photo {
-            transform: scale(1.25);
-        }
-
-        /**/
-        .button {
-            --width: 200px;
-            --height: 45px;
-            --tooltip-height: 35px;
-            --tooltip-width: 90px;
-            --gap-between-tooltip-to-button: 18px;
-            --button-color: #222;
-            --tooltip-color: #fff;
-            width: var(--width);
-            height: var(--height);
-            background: var(--button-color);
-            position: relative;
-            text-align: center;
-            border-radius: 0.45em;
-            font-family: "Arial";
-            transition: background 0.3s;
-        }
-
-        .button::before {
-            position: absolute;
-            content: attr(data-tooltip);
-            width: var(--tooltip-width);
-            height: var(--tooltip-height);
-            background-color: #555;
-            font-size: 0.9rem;
-            color: #fff;
-            border-radius: .25em;
-            line-height: var(--tooltip-height);
-            bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
-            left: calc(50% - var(--tooltip-width) / 2);
-        }
-
-        .button::after {
-            position: absolute;
-            content: '';
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
-            border-top-color: #555;
-            left: calc(50% - 10px);
-            bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
-        }
-
-        .button::after,
-        .button::before {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s;
-        }
-
-        .text {
-            display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
 
-        .button-wrapper,
-        .text,
-        .icon {
-            overflow: hidden;
-            position: absolute;
+        .master {
+            width: 780px;
+            height: 439px;
+            position: relative;
+        }
+
+        .master img {
             width: 100%;
-            height: 100%;
-            left: 0;
-            color: #fff;
+            position: absolute;
+            inset: 0;
+            transition-duration: 0.5s;
+            opacity: 0;
         }
 
-        .text {
-            top: 0
-        }
-
-        .text,
-        .icon {
-            transition: top 0.5s;
-        }
-
-        .icon {
-            color: #fff;
-            top: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icon svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .button:hover {
-            background: #222;
-        }
-
-        .button:hover .text {
-            top: -100%;
-        }
-
-        .button:hover .icon {
-            top: 0;
-        }
-
-        .button:hover:before,
-        .button:hover:after {
+        .master img.active {
             opacity: 1;
-            visibility: visible;
         }
 
-        .button:hover:after {
-            bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+        .items {
+            width: 183px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .button:hover:before {
-            bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
-        }
-
-        /**/
-        .card {
-            position: relative;
-            width: 11.875em;
-            height: 16.5em;
-            box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
+        .item {
+            width: 100%;
             cursor: pointer;
-            transition: all 120ms;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            padding: 0.5em;
-            padding-bottom: 3.4em;
+            position: relative;
         }
 
-        .card::after {
-            content: "Xem chi tiết";
-            padding-top: 1.25em;
-            padding-left: 1.25em;
+        .item img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .item::before {
+            width: 100%;
+            height: 100%;
             position: absolute;
+            top: 0;
             left: 0;
-            bottom: -60px;
-            background: #00AC7C;
-            color: #fff;
-            height: 2.5em;
-            width: 90%;
-            transition: all 80ms;
-            font-weight: 600;
-            text-transform: uppercase;
+            content: "";
+            background: #00000080;
+            pointer-events: none;
+        }
+
+        .item.active::before {
             opacity: 0;
         }
 
-        .card .title {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.9em;
+        .item.active::after {
+            content: "";
+            height: 108%;
+            width: 102%;
+            background: url("https://codetheworld.io/wp-content/uploads/2024/07/border.png") no-repeat 50%/100%;
             position: absolute;
-            left: 0.625em;
-            bottom: 1.875em;
-            font-weight: 400;
-            color: #000;
-        }
-
-        .card .price {
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 0.9em;
-            position: absolute;
-            left: 0.625em;
-            bottom: 0.625em;
-            color: #000;
-        }
-
-        .card:hover::after {
-            bottom: 0;
-            opacity: 1;
-        }
-
-        .card:active {
-            transform: scale(0.98);
-        }
-
-        .card:active::after {
-            content: "Added !";
-            height: 3.125em;
-        }
-
-        .image {
-            background: rgb(241, 241, 241);
-            width: 100%;
-            height: 100%;
-            display: grid;
-            place-items: center;
+            left: -1%;
+            top: -5%;
         }
     </style>
 </head>
 
 <body>
-    <div class="tg">
-
+    <div>
         <div class="body1">
-            <div class="card1">
-
-                <div class="body2">
-                    <section class="wrapper">
-                        <img id="preview" src="https://codetheworld.io/wp-content/uploads/2024/03/img-06.jpeg">
-                        <div class="thumbnails">
-                            <img class="thumbnail active"src="https://codetheworld.io/wp-content/uploads/2024/03/img-06.jpeg">
-                            <img class="thumbnail" src="https://codetheworld.io/wp-content/uploads/2024/03/img-04-1.webp">
-                            <img class="thumbnail" src="https://codetheworld.io/wp-content/uploads/2024/03/img-02.webp">
-                            <img class="thumbnail" src="https://codetheworld.io/wp-content/uploads/2024/03/img-03.jpeg">
-                        </div>
-                    </section>
+            <div class="container">
+                <div class="master">
+                    <img class="active" src="https://codetheworld.io/wp-content/uploads/2024/07/img_001.jpg">
+                    <img src="https://codetheworld.io/wp-content/uploads/2024/07/img_002.jpg">
+                    <img src="https://codetheworld.io/wp-content/uploads/2024/07/img_003.jpg">
+                    <img src="https://codetheworld.io/wp-content/uploads/2024/07/img_004.jpg">
                 </div>
-
-                <div class="content1">
-                    <h1 class="hz1">
-                        Embark on Roaring Adventures with A Tiger's Tale
-                    </h1>
-                    <div>
-                        <h3>Số lượng sản phẩm</h3>
-                        <div class="product-quantity">
-                            <button class="decrease">-</button>
-                            <input type="number" value="1" min="1" max="20" name="">
-                            <button class="increase">+</button>
-                        </div>
-
+                <div class="items">
+                    <div class="item active"><img src="https://codetheworld.io/wp-content/uploads/2024/07/img_001.jpg">
                     </div>
-                    <div>
-                        <p>Giá sản phẩm: VND</p>
-                        <p>Mô tả sản phẩm: </p>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <div data-tooltip="Price:-$20" class="button">
-                            <div class="button-wrapper">
-                                <div class="text">Buy Now</div>
-                                <span class="icon">
-                                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16"
-                                        width="16" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div data-tooltip="Thêm vào giỏ hàng" class="button">
-                            <div class="button-wrapper">
-                                <div class="text">Thêm vào giỏ hàng</div>
-                                <span class="icon">
-                                    <svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16"
-                                        width="16" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <small>
-                        Ngày tháng sản xuất
-                    </small>
+                    <div class="item"><img src="https://codetheworld.io/wp-content/uploads/2024/07/img_002.jpg"></div>
+                    <div class="item"><img src="https://codetheworld.io/wp-content/uploads/2024/07/img_003.jpg"></div>
+                    <div class="item"><img src="https://codetheworld.io/wp-content/uploads/2024/07/img_004.jpg"></div>
                 </div>
             </div>
         </div>
-
-        <div style="display: flex; justify-content: center; align-items: center;  background: #f4f4f6;">
-            <div style=" width: 975px; border: 1px solid; height: 400px;">
-                <div style="height: 84%;">
-                    <h1>Bình luận</h1>
-                </div>
-
-                <form action="">
-                    <div style="display: flex; gap: 10px;">
-                        <div class="messageBox" style="width: 700px;">
-                            <div class="fileUploadWrapper">
-                                <label for="file">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 337 337">
-                                        <circle stroke-width="20" stroke="#6c6c6c" fill="none" r="158.5" cy="168.5"
-                                            cx="168.5">
-                                        </circle>
-                                        <path stroke-linecap="round" stroke-width="25" stroke="#6c6c6c"
-                                            d="M167.759 79V259">
-                                        </path>
-                                        <path stroke-linecap="round" stroke-width="25" stroke="#6c6c6c"
-                                            d="M79 167.138H259">
-                                        </path>
-                                    </svg>
-                                    <span class="tooltip">Add an image</span>
-                                </label>
-                                <input type="file" id="file" name="file" />
-                            </div>
-                            <input style="width: 600px;" required="" placeholder="Message..." type="text"
-                                id="messageInput" />
-                            <button id="sendButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
-                                    <path fill="none"
-                                        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
-                                    </path>
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="33.67"
-                                        stroke="#6c6c6c"
-                                        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text"></label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text"></label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text"></label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text"></label>
-                            <input checked="" type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text"></label>
-                        </div>
-
-                    </div>
-                </form>
-
-            </div>
-        </div>
-
-
-        <div class="body3">
-            <h1>Sản phẩm giới hạn</h1>
-            <div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-01-1.webp);">
-                            </div>
-                            <h2>Image 01</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-02-1.webp);">
-                            </div>
-                            <h2>Image 02</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-03.jpeg);">
-                            </div>
-                            <h2>Image 03</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-04-1.webp);">
-                            </div>
-                            <h2>Image 04</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-05-1.webp);">
-                            </div>
-                            <h2>Image 05</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-06.jpeg);">
-                            </div>
-                            <h2>Image 06</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="photo"
-                                style="background-image:url(https://codetheworld.io/wp-content/uploads/2024/03/img-07.webp);">
-                            </div>
-                            <h2>Image 07</h2>
-                            <div class="slide">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officiis.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h1 style="text-align: center;">Sản phẩm cùng loại</h1>
-        <div style="display: flex; justify-content: center; align-items: center; width: 975px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
-                <div class="card">
-                    <div class="image"><span class="text">This is a chair.</span></div>
-                    <span class="title">Cool Chair</span>
-                    <span class="price">$100</span>
-                </div>
-            </div>
-        </div>
-
     </div>
-
-
     <script>
-        const $thumbnails = document.querySelectorAll('.thumbnail');
-        const $preview = document.getElementById('preview');
+        const images = document.querySelectorAll('.master img');
+        const items = document.querySelectorAll('.item');
 
-        $thumbnails.forEach(($item) => {
-            $item.addEventListener(
+        const setActive = (elements, element) => {
+            elements.forEach(i => {
+                i.classList.remove('active');
+            });
+
+            element.classList.add('active');
+        };
+
+        items.forEach((element, index) => {
+            element.addEventListener(
                 'click',
-                (event) => {
-                    $thumbnails.forEach((i) => {
-                        i.classList.remove('active');
-                    });
-                    $item.classList.add('active');
-                    $preview.src = $item.src;
-                },
+                () => {
+                    setActive(items, element);
+                    setActive(images, images[index]);
+                }
             );
         });
-
-        const decreaseBtn = document.querySelector('.decrease');
-        const increaseBtn = document.querySelector('.increase');
-        const quantityInput = document.querySelector('input[type="number"]');
-
-        decreaseBtn.addEventListener('click', () => {
-            if (quantityInput.value > 1) {
-                quantityInput.value--;
-            }
-        });
-
-        increaseBtn.addEventListener('click', () => {
-            if (quantityInput.value < 20) {
-                quantityInput.value++;
-            }
-        });
-
     </script>
 </body>
 
