@@ -21,12 +21,18 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserVipController;
 use App\Http\Controllers\VexemController;
 use App\Models\Baihat;
+use App\Models\BinhluanNhac;
 use App\Models\Lichtrinh;
+use App\Models\LikeNhac;
 use App\Models\Nhac;
 use App\Models\Nhomnhac;
+use App\Models\Profile;
 use App\Models\Sanpham;
+use App\Models\User;
 use App\Models\UserVip;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -136,7 +142,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api/songs', function () {
         $nhomnhac = Nhomnhac::all();
         $nhac = Nhac::all();
-    
+
         return response()->json([
             'nhomnhac' => $nhomnhac,
             'nhac' => $nhac
@@ -148,7 +154,44 @@ Route::middleware(['auth'])->group(function () {
         return response()->json(['songs' => $songs]);
     });
 
-    // nhạc admin và người dùng nhactheonhom
+    Route::get('/api/comments/{songId}', function ($songId) {
+        // Fetch the comments related to the given song
+        $comments = BinhluanNhac::where('nhac_id', $songId)->get();
+    
+        // Fetch users related to those comments
+        $userIds = $comments->pluck('users_id');
+        $users = User::whereIn('id', $userIds)->get();
+    
+        // Fetch profiles related to those users
+        $profiles = DB::table('profile')->whereIn('users_id', $userIds)->get();
+    
+        return response()->json([
+            'comments' => $comments,
+            'users' => $users,
+            'profiles' => $profiles
+        ]);
+    });
+
+    Route::post('/save-data', function (Request $request) {
+        $data = $request->all();
+        $likenhac = LikeNhac::where('users_id', $data['users_id'])->where('nhac_id', $data['nhac_id'])->first();
+        // Create a new LikeNhac instance and save the data
+        if (empty($likenhac)) {
+            $likenhac = new LikeNhac();
+            $likenhac->users_id = $data['users_id'];
+            $likenhac->nhac_id = $data['nhac_id'];
+            $likenhac->save();
+        }
+
+
+        // Return a JSON response
+        return response()->json(['success' => true, 'message' => 'Data saved successfully!']);
+    })->name('save.data');
+
+
+
+
+    // nhạc admin và người dùng songknd
     Route::match(['get', 'post'], '/themnhacmoi/{id}', [NhacController::class, 'themnhacmoi'])->name('themnhacmoi');
     Route::match(['get', 'post'], '/hienthin/{id}', [NhacController::class, 'hienthin'])->name('hienthin');
     Route::match(['get', 'post'], '/hienthinus/{id}', [NhacController::class, 'hienthinus'])->name('hienthinus');

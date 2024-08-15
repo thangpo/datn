@@ -19,4 +19,9 @@ class Profile extends Model
         'gioitinh',
         'anhnd'
   ];
+
+  public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

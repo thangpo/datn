@@ -150,6 +150,26 @@ class NhacController extends Controller
         'nhaci', 'nhact', 'nhaca', 'binhluan', 'user', 'profiles', 'nhacid'));
     }
 
+
+    public function songknd($id)
+    {
+        $nhacs = Nhac::find($id);
+        $nhac = DB::table('nhac')->get();
+        foreach ($nhac as $n) {
+            $likenhac = LikeNhac::where('nhac_id', $n->id)
+                ->join('nhac', 'nhac.id', '=', 'likenhac.nhac_id')
+                ->select('likenhac.*', 'nhac_id')->get();
+            $nhac = Nhac::withCount('likenhac')->get();
+        }
+        $nhomnhacv = DB::table('nhomnhac')->get();
+        $nhomnhac = Nhomnhac::where('id', $nhacs->nhomnhac_id)->first();
+        $nhaci = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('nhac');
+        $nhact = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('tenn');
+        $nhaca = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('anh');
+        $nhacid = Nhac::where('nhomnhac_id', $nhomnhac->id)->pluck('id');
+        return view('trangnguoid.nhac', compact('nhacs', 'nhac', 'nhomnhac', 'nhomnhacv', 'nhaci', 'nhact', 'nhaca', 'nhacid'));
+    }
+
     // chuyển bài hát nhomnhacnd nhomnhacnd thumucnhac tgalbum  binhluannhac
     public function playnext($id1, $id2)
     {
@@ -268,25 +288,6 @@ class NhacController extends Controller
 
             return back();
         }
-    }
-
-    public function songknd($id)
-    {
-        $nhacs = Nhac::find($id);
-        $nhac = DB::table('nhac')->get();
-        foreach ($nhac as $n) {
-            $nhomnhac = Nhomnhac::where('id', $n->nhomnhac_id)->get();
-
-            $likenhac = LikeNhac::where('nhac_id', $n->id)
-                ->join('nhac', 'nhac.id', '=', 'likenhac.nhac_id')
-                ->select('likenhac.*', 'nhac_id')->get();
-            $nhac = Nhac::withCount('likenhac')->get();
-        }
-        $nhomnhacv = DB::table('nhomnhac')->get();
-        $nhaclx = Nhac::findOrFail($id);
-        $nhaclx->view_count++;
-        $nhaclx->save();
-        return view('trangnguoid.nhac', compact('nhacs', 'nhac', 'nhomnhac', 'nhomnhacv'));
     }
 
     public function playnextknd($id)

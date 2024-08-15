@@ -5,10 +5,16 @@
   <title>TG 48 MUSIC</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="{{asset('css/nhac.css')}}">
 </head>
+<style>
+  #div6 {
+    display: none;
+    /* Initially hide div2 */
+  }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <body>
   <div class="App">
@@ -240,74 +246,73 @@
           </div>
 
           <div style="width: 100px;">
-            <button onclick="toggleDivs()" tabindex="0" class="plusButton">
+            <div class="plusButton" data-nhac-id="{{$nhacs->id}}" onclick="toggleDivs()" id="myElement">
               <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                 <g mask="url(#mask0_21_345)">
                   <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z"></path>
                 </g>
               </svg>
-            </button>
-          </div>
-
-          <div>
-            <div title="Like" class="heart-container">
-              <input id="Give-It-An-Id" class="checkbox" type="checkbox">
-              <div class="svg-container">
-                <svg xmlns="http://www.w3.org/2000/svg" class="svg-outline" viewBox="0 0 24 24">
-                  <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                  </path>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="svg-filled" viewBox="0 0 24 24">
-                  <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                  </path>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="50" width="50" class="svg-celebrate">
-                  <polygon points="10,10 20,20"></polygon>
-                  <polygon points="10,50 20,50"></polygon>
-                  <polygon points="20,80 30,70"></polygon>
-                  <polygon points="90,10 80,20"></polygon>
-                  <polygon points="90,50 80,50"></polygon>
-                  <polygon points="80,80 70,70"></polygon>
-                </svg>
-              </div>
             </div>
           </div>
 
           <div>
-            <label class="container2">
-              <input checked="checked" type="checkbox">
-              <svg onclick="repeatSong()" type="button" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="lock-open">
-                <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"></path>
-              </svg>
-              <svg viewBox="0 0 448 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="lock">
-                <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path>
-              </svg>
-            </label>
+            <div title="Like" class="heart-container">
+              <div id="div5">
+                <form id="dataForm">
+                  @csrf
+                  <input type="hidden" name="users_id" id="users_id" value="{{ $users->id }}">
+                  <input type="hidden" name="nhac_id" id="nhac_id" value="{{ $nhacs->id }}">
+                  <div class="svg-container">
+
+                    <button id="toggleButton" type="submit">Like</button>
+                </form>
+              </div>
+            </div>
           </div>
 
-          <!-- đây là trang volum -->
-          <div class="extra-controls">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="30" width="34" class="volume_button">
-              <path clip-rule="evenodd" d="M11.26 3.691A1.2 1.2 0 0 1 12 4.8v14.4a1.199 1.199 0 0 1-2.048.848L5.503 15.6H2.4a1.2 1.2 0 0 1-1.2-1.2V9.6a1.2 1.2 0 0 1 1.2-1.2h3.103l4.449-4.448a1.2 1.2 0 0 1 1.308-.26Zm6.328-.176a1.2 1.2 0 0 1 1.697 0A11.967 11.967 0 0 1 22.8 12a11.966 11.966 0 0 1-3.515 8.485 1.2 1.2 0 0 1-1.697-1.697A9.563 9.563 0 0 0 20.4 12a9.565 9.565 0 0 0-2.812-6.788 1.2 1.2 0 0 1 0-1.697Zm-3.394 3.393a1.2 1.2 0 0 1 1.698 0A7.178 7.178 0 0 1 18 12a7.18 7.18 0 0 1-2.108 5.092 1.2 1.2 0 1 1-1.698-1.698A4.782 4.782 0 0 0 15.6 12a4.78 4.78 0 0 0-1.406-3.394 1.2 1.2 0 0 1 0-1.698Z" fill-rule="evenodd"></path>
-            </svg>
-            <input type="range" class="volume-slider" value="50" max="100" id="volumeSlider">
+          <div id="div6" style="color: while;">
+            <div style="width: 50px; height: 50px; background-color: #ccc;">
+              <button id="toggleButton2">Dislike</button>
+            </div>
           </div>
-
         </div>
-        @endif
+
+        <div>
+          <label class="container2">
+            <input checked="checked" type="checkbox">
+            <svg onclick="repeatSong()" type="button" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="lock-open">
+              <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32V144C576 64.5 511.5 0 432 0S288 64.5 288 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H352V144z"></path>
+            </svg>
+            <svg viewBox="0 0 448 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="lock">
+              <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path>
+            </svg>
+          </label>
+        </div>
+
+        <!-- đây là trang volum -->
+        <div class="extra-controls">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height="30" width="34" class="volume_button">
+            <path clip-rule="evenodd" d="M11.26 3.691A1.2 1.2 0 0 1 12 4.8v14.4a1.199 1.199 0 0 1-2.048.848L5.503 15.6H2.4a1.2 1.2 0 0 1-1.2-1.2V9.6a1.2 1.2 0 0 1 1.2-1.2h3.103l4.449-4.448a1.2 1.2 0 0 1 1.308-.26Zm6.328-.176a1.2 1.2 0 0 1 1.697 0A11.967 11.967 0 0 1 22.8 12a11.966 11.966 0 0 1-3.515 8.485 1.2 1.2 0 0 1-1.697-1.697A9.563 9.563 0 0 0 20.4 12a9.565 9.565 0 0 0-2.812-6.788 1.2 1.2 0 0 1 0-1.697Zm-3.394 3.393a1.2 1.2 0 0 1 1.698 0A7.178 7.178 0 0 1 18 12a7.18 7.18 0 0 1-2.108 5.092 1.2 1.2 0 1 1-1.698-1.698A4.782 4.782 0 0 0 15.6 12a4.78 4.78 0 0 0-1.406-3.394 1.2 1.2 0 0 1 0-1.698Z" fill-rule="evenodd"></path>
+          </svg>
+          <input type="range" class="volume-slider" value="50" max="100" id="volumeSlider">
+        </div>
+
       </div>
+      @endif
     </div>
+  </div>
 
 
-    <div class="App__main-view">
-      <div class="App__top-gradient"></div>
-      <div class="App__header-placeholder"></div>
-      <!-- thẻ cần hiện -->
-      <div id="div2" style="display: none;">
-        <div class="card">
-          <span class="title">Comments</span>
-          @if(empty($binhluan) != 'Null')
-          <div style="height: 350px; overflow-y: auto;">
+  <div class="App__main-view">
+    <div class="App__top-gradient"></div>
+    <div class="App__header-placeholder"></div>
+    <!-- thẻ cần hiện -->
+    <div id="div2" style="display: none;">
+      <div class="card">
+        <span class="title">Comments</span>
+        @if(empty($binhluan) != 'Null')
+        <div style="height: 350px; overflow-y: auto;">
+          <div id="comments-section">
             @foreach($binhluan as $bl)
             @foreach($user as $us)
             @foreach($profiles as $pfl)
@@ -342,241 +347,295 @@
             @endforeach
             @endforeach
           </div>
-          @endif
-          <div class="text-box">
-            <div class="box-container">
-              <textarea placeholder="bình luận"></textarea>
-              <div>
-                <div class="formatting">
-                  <button type="button">
-                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 6C5 4.58579 5 3.87868 5.43934 3.43934C5.87868 3 6.58579 3 8 3H12.5789C15.0206 3 17 5.01472 17 7.5C17 9.98528 15.0206 12 12.5789 12H5V6Z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12.4286 12H13.6667C16.0599 12 18 14.0147 18 16.5C18 18.9853 16.0599 21 13.6667 21H8C6.58579 21 5.87868 21 5.43934 20.5607C5 20.1213 5 19.4142 5 18V12"></path>
-                    </svg>
-                  </button>
-                  <button type="button">
-                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12 4H19"></path>
-                      <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M8 20L16 4"></path>
-                      <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 20H12"></path>
-                    </svg>
-                  </button>
-                  <button type="button">
-                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5.5 3V11.5C5.5 15.0899 8.41015 18 12 18C15.5899 18 18.5 15.0899 18.5 11.5V3"></path>
-                      <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M3 21H21"></path>
-                    </svg>
-                  </button>
-                  <button type="button">
-                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M4 12H20"></path>
-                      <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M17.5 7.66667C17.5 5.08934 15.0376 3 12 3C8.96243 3 6.5 5.08934 6.5 7.66667C6.5 8.15279 6.55336 8.59783 6.6668 9M6 16.3333C6 18.9107 8.68629 21 12 21C15.3137 21 18 19.6667 18 16.3333C18 13.9404 16.9693 12.5782 14.9079 12"></path>
-                    </svg>
-                  </button>
-                  <button type="button">
-                    <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                      <circle stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" r="10" cy="12" cx="12"></circle>
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M8 15C8.91212 16.2144 10.3643 17 12 17C13.6357 17 15.0879 16.2144 16 15"></path>
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#707277" d="M8.00897 9L8 9M16 9L15.991 9"></path>
-                    </svg>
-                  </button>
-                  <button type="submit" class="send" title="Send">
-                    <svg fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M12 5L12 20"></path>
-                      <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"></path>
-                    </svg>
-                  </button>
-                </div>
+        </div>
+        @endif
+        <div class="text-box">
+          <div class="box-container">
+            <textarea placeholder="bình luận"></textarea>
+            <div>
+              <div class="formatting">
+                <button type="button">
+                  <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 6C5 4.58579 5 3.87868 5.43934 3.43934C5.87868 3 6.58579 3 8 3H12.5789C15.0206 3 17 5.01472 17 7.5C17 9.98528 15.0206 12 12.5789 12H5V6Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12.4286 12H13.6667C16.0599 12 18 14.0147 18 16.5C18 18.9853 16.0599 21 13.6667 21H8C6.58579 21 5.87868 21 5.43934 20.5607C5 20.1213 5 19.4142 5 18V12"></path>
+                  </svg>
+                </button>
+                <button type="button">
+                  <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M12 4H19"></path>
+                    <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M8 20L16 4"></path>
+                    <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5 20H12"></path>
+                  </svg>
+                </button>
+                <button type="button">
+                  <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M5.5 3V11.5C5.5 15.0899 8.41015 18 12 18C15.5899 18 18.5 15.0899 18.5 11.5V3"></path>
+                    <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M3 21H21"></path>
+                  </svg>
+                </button>
+                <button type="button">
+                  <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M4 12H20"></path>
+                    <path stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M17.5 7.66667C17.5 5.08934 15.0376 3 12 3C8.96243 3 6.5 5.08934 6.5 7.66667C6.5 8.15279 6.55336 8.59783 6.6668 9M6 16.3333C6 18.9107 8.68629 21 12 21C15.3137 21 18 19.6667 18 16.3333C18 13.9404 16.9693 12.5782 14.9079 12"></path>
+                  </svg>
+                </button>
+                <button type="button">
+                  <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                    <circle stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" r="10" cy="12" cx="12"></circle>
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#707277" d="M8 15C8.91212 16.2144 10.3643 17 12 17C13.6357 17 15.0879 16.2144 16 15"></path>
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="3" stroke="#707277" d="M8.00897 9L8 9M16 9L15.991 9"></path>
+                  </svg>
+                </button>
+                <button type="submit" class="send" title="Send">
+                  <svg fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M12 5L12 20"></path>
+                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#ffffff" d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"></path>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- thẻ cần ẩn -->
-      <div id="div1">
-        <section class="App__section App__quick-links">
-          <h1>Nhóm nhạc của TG 48</h1>
-          <div class="App__quick-links-container">
-            @foreach ($nhomnhacv as $nnv)
-            @if(empty($users) != 'Null')
-            <div class="group-item" data-nhomnhac-id="{{ $nnv->id }}" onclick="showSongs(event)" style="text-decoration: none;">
-              <div class="App__quick-link">
-                <div class="App__quick-link-featured-img">
-                  <img style="width: 50px; height: 50px;" src="{{ asset('uploads/' . $nnv->logonn) }}" alt="">
-                </div>
-                <span>{{ $nnv->tennn }}</span>
+    <!-- thẻ cần ẩn -->
+    <div id="div1">
+      <section class="App__section App__quick-links">
+        <h1>Nhóm nhạc của TG 48</h1>
+        <div class="App__quick-links-container">
+          @foreach ($nhomnhacv as $nnv)
+          @if(empty($users) != 'Null')
+          <div class="group-item" data-nhomnhac-id="{{ $nnv->id }}" data-user-id="{{ $users->id }}" onclick="showSongs(event)" style="text-decoration: none;">
+            <div class="App__quick-link">
+              <div class="App__quick-link-featured-img">
+                <img style="width: 50px; height: 50px;" src="{{ asset('uploads/' . $nnv->logonn) }}" alt="">
               </div>
+              <span>{{ $nnv->tennn }}</span>
             </div>
-            @endif
+          </div>
+          @endif
 
+          @if(empty($users))
+          <a href="{{route('nhomnhacct', $nnv->id)}}" style="text-decoration: none;">
+            <div class="App__quick-link">
+              <div class="App__quick-link-featured-img"><img style="width: 50px; height: 50px;" src="{{asset('uploads/'.$nnv->logonn)}}" alt=""></div>
+              <span>{{$nnv->tennn}}</span>
+            </div>
+          </a>
+          @endif
+          @endforeach
+        </div>
+      </section>
+
+      <div id="div4" style="display: none;">
+        <div id="songs-list" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+
+        </div>
+      </div>
+
+      <div id="div3">
+        <section class="App__section App__your-shows">
+          <div class="App__section-header">
+            <h3>Bài hát mới ra</h3>
+            <span>SEE ALL</span>
+          </div>
+          <div class="App__section-grid-container">
+            @foreach ($nhac as $n)
             @if(empty($users))
-            <a href="{{route('nhomnhacct', $nnv->id)}}" style="text-decoration: none;">
-              <div class="App__quick-link">
-                <div class="App__quick-link-featured-img"><img style="width: 50px; height: 50px;" src="{{asset('uploads/'.$nnv->logonn)}}" alt=""></div>
-                <span>{{$nnv->tennn}}</span>
+            <a href="{{route('songknd', $n->id)}}" style="text-decoration: none;">
+              <div class="App__section-grid-item">
+                <div class=""><img style="width: 150px; height: 150px;" src="{{asset('uploads/'.$n->anh)}}" alt=""></div>
+                <h3>{{$n->tenn}}</h3>
+                <span>Lượt người nghe: {{$n->view_count}}</span><br>
+                <h5><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                    <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
+                  </svg> {{$n->likenhac_count}}</h5>
+                <span>{{$n->loainhac}}</span>
+              </div>
+            </a>
+            @endif
+            @if(empty($users) != 'Null')
+            <a href="/songs/{{$n->id}}/user/{{$users->id}}" style="text-decoration: none;">
+              <div class="App__section-grid-item">
+                <div class=""><img style="width: 150px; height: 150px;" src="{{asset('uploads/'.$n->anh)}}" alt=""></div>
+                <h3>{{$n->tenn}}</h3>
+                <span>Lượt người nghe: {{$n->view_count}}</span><br>
+                <h5><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                    <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
+                  </svg> {{$n->likenhac_count}}</h5>
+                <span>{{$n->loainhac}}</span>
               </div>
             </a>
             @endif
             @endforeach
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Short Wave</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Post Reports</h3>
+              <span>The Washington Post</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Planet Money</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>How I Built this...</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>TED Radio Hour</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Short Wave</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Post Reports</h3>
+              <span>The Washington Post</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Planet Money</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>How I Built this...</h3>
+              <span>NPR</span>
+            </div>
           </div>
         </section>
-
-        <div id="div4" style="display: none;">
-          <div id="nhomnhac-list" style="color: white;"></div>
-          <div id="nhac-list" style="color: white;"></div>
-          <div id="songs-list"></div>
-        </div>
-
-        <div id="div3">
-          <section class="App__section App__your-shows">
-            <div class="App__section-header">
-              <h3>Bài hát mới ra</h3>
-              <span>SEE ALL</span>
+        <section class="App__section App__your-shows">
+          <div class="App__section-header">
+            <h3>Your top mixes</h3>
+            <span>SEE ALL</span>
+          </div>
+          <div class="App__section-grid-container">
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>TED Radio Hour</h3>
+              <span>NPR</span>
             </div>
-            <div class="App__section-grid-container">
-              @foreach ($nhac as $n)
-              @if(empty($users))
-              <a href="{{route('songknd', $n->id)}}" style="text-decoration: none;">
-                <div class="App__section-grid-item">
-                  <div class=""><img style="width: 150px; height: 150px;" src="{{asset('uploads/'.$n->anh)}}" alt=""></div>
-                  <h3>{{$n->tenn}}</h3>
-                  <span>Lượt người nghe: {{$n->view_count}}</span><br>
-                  <h5><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                      <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
-                    </svg> {{$n->likenhac_count}}</h5>
-                  <span>{{$n->loainhac}}</span>
-                </div>
-              </a>
-              @endif
-              @if(empty($users) != 'Null')
-              <a href="/songs/{{$n->id}}/user/{{$users->id}}" style="text-decoration: none;">
-                <div class="App__section-grid-item">
-                  <div class=""><img style="width: 150px; height: 150px;" src="{{asset('uploads/'.$n->anh)}}" alt=""></div>
-                  <h3>{{$n->tenn}}</h3>
-                  <span>Lượt người nghe: {{$n->view_count}}</span><br>
-                  <h5><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                      <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
-                    </svg> {{$n->likenhac_count}}</h5>
-                  <span>{{$n->loainhac}}</span>
-                </div>
-              </a>
-              @endif
-              @endforeach
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Short Wave</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Post Reports</h3>
-                <span>The Washington Post</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Planet Money</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>How I Built this...</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>TED Radio Hour</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Short Wave</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Post Reports</h3>
-                <span>The Washington Post</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Planet Money</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>How I Built this...</h3>
-                <span>NPR</span>
-              </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Short Wave</h3>
+              <span>NPR</span>
             </div>
-          </section>
-          <section class="App__section App__your-shows">
-            <div class="App__section-header">
-              <h3>Your top mixes</h3>
-              <span>SEE ALL</span>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Post Reports</h3>
+              <span>The Washington Post</span>
             </div>
-            <div class="App__section-grid-container">
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>TED Radio Hour</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Short Wave</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Post Reports</h3>
-                <span>The Washington Post</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Planet Money</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>How I Built this...</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>TED Radio Hour</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Short Wave</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Post Reports</h3>
-                <span>The Washington Post</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>Planet Money</h3>
-                <span>NPR</span>
-              </div>
-              <div class="App__section-grid-item">
-                <div class="featured-image"></div>
-                <h3>How I Built this...</h3>
-                <span>NPR</span>
-              </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Planet Money</h3>
+              <span>NPR</span>
             </div>
-          </section>
-        </div>
-
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>How I Built this...</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>TED Radio Hour</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Short Wave</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Post Reports</h3>
+              <span>The Washington Post</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>Planet Money</h3>
+              <span>NPR</span>
+            </div>
+            <div class="App__section-grid-item">
+              <div class="featured-image"></div>
+              <h3>How I Built this...</h3>
+              <span>NPR</span>
+            </div>
+          </div>
+        </section>
       </div>
+
     </div>
+  </div>
 
   </div>
 
   @if(empty($nhacs) != 'Null')
   <script>
+    var div5 = document.getElementById("div5");
+    var div6 = document.getElementById("div6");
+    const toggleButton = document.getElementById('toggleButton');
+
+    const toggleButton2 = document.getElementById('toggleButton2');
+    // Check localStorage for the state
+    if (localStorage.getItem('divState') === 'div6') {
+      div5.style.display = 'none';
+      div6.style.display = 'block';
+    }
+
+    toggleButton.addEventListener('click', () => {
+      if (div5.style.display !== 'none') {
+        div5.style.display = 'none';
+        div6.style.display = 'block';
+        localStorage.setItem('divState', 'div6'); // Save state as div6 visible
+      } else {
+        div5.style.display = 'block';
+        div6.style.display = 'none';
+        localStorage.setItem('divState', 'div5'); // Save state as div1 visible
+      }
+    });
+
+    toggleButton2.addEventListener('click', () => {
+      if (div6.style.display !== 'none') {
+        div6.style.display = 'none';
+        div5.style.display = 'block';
+        localStorage.setItem('divState', 'div5'); // Save state as div5 visible
+      } else {
+        div6.style.display = 'block';
+        div5.style.display = 'none';
+        localStorage.setItem('divState', 'div6'); // Save state as div1 visible
+      }
+    });
+    // nhập dữ liệu database
+    $('#dataForm').on('submit', function(e) {
+      e.preventDefault(); // Prevent the form from submitting the traditional way
+
+      $.ajax({
+        url: '/save-data', // Use the correct route URL directly
+        method: 'POST',
+        data: $(this).serialize(), // Serialize form data
+        success: function(response) {
+          if (response.success) {
+            $('#responseMessage').html('<p>' + response.message + '</p>');
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('Error:', error);
+        }
+      });
+    });
+    ///
     function showSongs(event) {
       // Get the nhomnhac_id from the clicked element
       var div3 = document.getElementById("div3");
@@ -591,13 +650,54 @@
             songsList.innerHTML = ''; // Clear previous songs
 
             data.songs.forEach(song => {
-              // Create and append song elements
-              const songItem = document.createElement('div');
-              songItem.textContent = song.tenn; // Replace 'title' with actual song property
+              // Create the main container for the song item
+              const songItem = document.createElement('a');
+              const userId = `{{ $users->id }}`; // Inject user ID from Blade
+              songItem.href = `/songs/${song.id}/user/${userId}`; // Use userId in the URL
+              songItem.style.textDecoration = 'none';
+
+              const gridItemDiv = document.createElement('div');
+              gridItemDiv.className = 'App__section-grid-item';
+
+              // Image container
+              const imgContainerDiv = document.createElement('div');
+              const img = document.createElement('img');
+              img.style.width = '150px';
+              img.style.height = '150px';
+              img.src = `/uploads/${song.anh}`; // Set the image source
+              img.alt = '';
+              imgContainerDiv.appendChild(img);
+
+              // Song title
+              const title = document.createElement('h3');
+              title.textContent = song.tenn;
+
+              // Like count with SVG
+              const likeCount = document.createElement('h5');
+              likeCount.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
+                            </svg> ${song.likenhac_count}`;
+
+              // Genre
+              const genre = document.createElement('span');
+              genre.textContent = song.loainhac;
+
+              // Append elements to the grid item div
+              gridItemDiv.appendChild(imgContainerDiv);
+              gridItemDiv.appendChild(title);
+              gridItemDiv.appendChild(likeCount);
+              gridItemDiv.appendChild(genre);
+
+              // Append the grid item to the link
+              songItem.appendChild(gridItemDiv);
+
+              // Append the link to the songs list
               songsList.appendChild(songItem);
             });
           })
           .catch(error => console.error('Error fetching songs:', error));
+
+
       } else {
         fetch(`/api/song/${nhomnhacId}`)
           .then(response => response.json())
@@ -606,17 +706,56 @@
             songsList.innerHTML = ''; // Clear previous songs
 
             data.songs.forEach(song => {
-              // Create and append song elements
-              const songItem = document.createElement('div');
-              songItem.textContent = song.tenn; // Replace 'title' with actual song property
+              // Create the main container for the song item
+              const songItem = document.createElement('a');
+              const userId = `{{ $users->id }}`; // Inject user ID from Blade
+              songItem.href = `/songs/${song.id}/user/${userId}`; // Use userId in the URL
+              songItem.style.textDecoration = 'none';
+
+              const gridItemDiv = document.createElement('div');
+              gridItemDiv.className = 'App__section-grid-item';
+
+              // Image container
+              const imgContainerDiv = document.createElement('div');
+              const img = document.createElement('img');
+              img.style.width = '150px';
+              img.style.height = '150px';
+              img.src = `/uploads/${song.anh}`; // Set the image source
+              img.alt = '';
+              imgContainerDiv.appendChild(img);
+
+              // Song title
+              const title = document.createElement('h3');
+              title.textContent = song.tenn;
+
+              // Like count with SVG
+              const likeCount = document.createElement('h5');
+              likeCount.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                <path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path>
+                            </svg> ${song.likenhac_count}`;
+
+              // Genre
+              const genre = document.createElement('span');
+              genre.textContent = song.loainhac;
+
+              // Append elements to the grid item div
+              gridItemDiv.appendChild(imgContainerDiv);
+              gridItemDiv.appendChild(title);
+              gridItemDiv.appendChild(likeCount);
+              gridItemDiv.appendChild(genre);
+
+              // Append the grid item to the link
+              songItem.appendChild(gridItemDiv);
+
+              // Append the link to the songs list
               songsList.appendChild(songItem);
             });
           })
           .catch(error => console.error('Error fetching songs:', error));
+
         div3.style.display = "none"; // Ẩn Div 1
         div4.style.display = "block"; // Hiển thị Div 2
       }
-
       // Fetch songs for the selected nhomnhac_id
 
 
@@ -700,6 +839,10 @@
     var image = document.getElementById("image");
 
     // Hàm để chuyển sang bài hát tiếp theo
+    const element = document.getElementById('myElement');
+    const commentsSection = document.getElementById('comments-section');
+
+
     function nextSong() {
       currentSongIndex = (currentSongIndex + 1) % songs.length;
       currentSongImage = (currentSongIndex + 1) % songImage.length;
@@ -709,7 +852,95 @@
       audio.src = "{{ asset('audio/') }}/" + songs[currentSongIndex];
       image.src = "{{ asset('uploads/') }}/" + songImage[currentSongImage];
       document.getElementById('tennhac').innerText = songTitle[currentSong];
-      document.getElementById('tenid').innerText = songId[currentSongId];
+      element.setAttribute('data-nhac-id', songId[currentSongId]);
+      // bình luận the nhạc
+      fetch(`/api/comments/${songId[currentSongId]}`)
+        .then(response => response.json())
+        .then(data => {
+          commentsSection.innerHTML = ''; // Clear any existing comments
+
+          data.comments.forEach(comment => {
+
+            const user = data.users.find(u => u.id === comment.users_id);
+            const profile = data.profiles.find(p => p.users_id === user.id);
+
+            if (!profile) {
+              console.warn('Profile not found for user:', user);
+              return; // Skip this comment if no profile is found
+            }
+
+            // Create the comment div
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comments';
+
+            // Create the comment-react div
+            const reactDiv = document.createElement('div');
+            reactDiv.className = 'comment-react';
+
+            const reactButton = document.createElement('button');
+            reactButton.innerHTML = `
+                            <svg fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#707277" stroke-linecap="round" stroke-width="2" stroke="#707277" d="M19.4626 3.99415C16.7809 2.34923 14.4404 3.01211 13.0344 4.06801C12.4578 4.50096 12.1696 4.71743 12 4.71743C11.8304 4.71743 11.5422 4.50096 10.9656 4.06801C9.55962 3.01211 7.21909 2.34923 4.53744 3.99415C1.01807 6.15294 0.221721 13.2749 8.33953 19.2834C9.88572 20.4278 10.6588 21 12 21C13.3412 21 14.1143 20.4278 15.6605 19.2834C23.7783 13.2749 22.9819 6.15294 19.4626 3.99415Z"></path>
+                            </svg>
+                        `;
+            reactDiv.appendChild(reactButton);
+
+            const hr = document.createElement('hr');
+            reactDiv.appendChild(hr);
+
+            const likeCount = document.createElement('span');
+            likeCount.textContent = '14'; // Replace with actual like count
+            reactDiv.appendChild(likeCount);
+
+            commentDiv.appendChild(reactDiv);
+
+            // Create the comment-container div
+            const commentContainer = document.createElement('div');
+            commentContainer.className = 'comment-container';
+
+            // Create the user div
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user';
+
+            const userPicDiv = document.createElement('div');
+            userPicDiv.className = 'user-pic';
+
+            const userImg = document.createElement('img');
+            userImg.style.width = '50px';
+            userImg.style.height = '50px';
+            userImg.src = `/uploads/${profile.anhnd}`;
+            userImg.alt = '';
+            userPicDiv.appendChild(userImg);
+
+            userDiv.appendChild(userPicDiv);
+
+            const userInfoDiv = document.createElement('div');
+            userInfoDiv.className = 'user-info';
+
+            const userName = document.createElement('span');
+            userName.textContent = profile.tennd;
+            userInfoDiv.appendChild(userName);
+
+            const userTime = document.createElement('p');
+            userTime.textContent = 'Wednesday, March 13th at 2:45pm'; // Replace with actual timestamp
+            userInfoDiv.appendChild(userTime);
+
+            userDiv.appendChild(userInfoDiv);
+            commentContainer.appendChild(userDiv);
+
+            const commentContent = document.createElement('p');
+            commentContent.className = 'comment-content';
+            commentContent.textContent = comment.noidung;
+
+            commentContainer.appendChild(commentContent);
+            commentDiv.appendChild(commentContainer);
+
+            // Append the entire comment div to the comments section
+            commentsSection.appendChild(commentDiv);
+          });
+        })
+        .catch(error => console.error('Error fetching comments:', error));
+      //
       audio.load();
       audio.play();
       //audio.addEventListener('ended', nextSong);
@@ -754,7 +985,7 @@
     }
 
     // Thêm sự kiện 'click' cho nút lặp lại
-    repeatButton.addEventListener('click', toggleRepeat);
+    //repeatButton.addEventListener('click', toggleRepeat);
 
     //audio.addEventListener('ended', nextSong);
   </script>
